@@ -1,0 +1,218 @@
+﻿Wed Mar 12 02:11:20 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/embedded/setting.py: (error when specs were ran on PyScripter)
+
+	* pyspec/cui/addin.py: Bug fix(error when wxPython was not installed)
+
+Fri Feb 29 00:45:00 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/embedded/language/*: Add NLS funtion support(-g)
+
+Fri Feb 22 20:40:38 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* doc/legacy_test.txt: New.
+
+	* doc/usage-jp.txt: New.
+
+	* doc/why_is_pyspec_so_fat.txt: Add new article.
+
+Tue Feb 19 20:56:38 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* sample/rst2codeplex: New. This is sample for legacy code testing
+
+	* pyspec/cui/framework.py: Add --show-legacy-data option. That shows recorded data in reST.
+
+	* pyspec/embedded/setting.py: Clear all recorded data if --reset-legacy-data option was passed.
+
+Fri Feb 15 12:15:39 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/embedded/setting.py: Move test settings from framework/**Recorder classes
+
+Wed Feb 13 23:33:54 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/legacycode.py: New. This module has a proxy class for legacy code testing.
+
+Sun Feb 10 22:56:38 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/framework.py: Bug(if there is ignore, result is not shown) fixed.
+
+	* pyspec/embedded/setting.py: New. This module contains many variables that control pyspec
+
+	* pyspec/embedded/assertions.py: Add new verification method(should_not_be_changed).
+
+Sun Feb 10 11:25:20 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/embedded/dprint.py: Implement dprint()
+
+Thu Feb 07 00:56:02 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/embedded/assertions.py: Add new verification method(should_be_in).
+
+Mon Feb 04 08:06:20 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* doc/usage.txt, doc/dbc.txt, doc/why_is_pyspec_so_fat.txt: Add new documents
+
+Sun Feb 03 18:28:29 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/framework.py, spec/behavior_pyspec_outer_data.py: Fix bug of multi key data provider behavior.
+
+Thu Jan 31 01:11:13 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/cuiaddin/reSTFormatter: implemented
+
+	* pyspec/framework.py, pyspec/__init__.py: Add Design by Contract support to pyspec
+
+Mon Jan 28 08:30:47 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/api.py, pyspec/addin.py: copy addin mechanism from wxRunner to CUIRunner
+
+	* pyspec/cuiaddin/reSTFormatter: New!
+
+	* pyspec/cui: create new cui package from textui module
+
+	* pyspec/framework.py: rename SpecTestResult to SpecResultRecorder
+
+	* pyspec/wxui/framework.py: rename WxSpecTestResult to WxSpecResultRecorder
+
+	* pyspec/cui/framework.py: rename TextXXX to CUIXXX
+
+	* pyspec/embedded: New!
+
+	* pyspec/__init__.py: relocate verification methods to pyspec/embedded
+
+Thu Jan 24 00:52:10 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/mockobject.py(MockObject): split MockObject to MockObject and MockObjectRecorder
+
+	* pyspec/doc/*: create English documents
+
+	* new version 0.51 release to codeplex
+
+Wed Jan 16 20:45:30 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/mockobject.py(MockObject): with_any_parameter() is added
+
+Thu Jan 10 12:59:42 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/mockobject.py(MockObject): support repeated method call
+
+Wed Jan 09 11:45:00 2008  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/mockobject.py(MockObject): change method names
+
+	* pyspec/mockobject.py(MockObject): change console out format
+
+Fri Dec 28 13:39:30 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/util.py(create_spec_name()): change spec naming rule.
+
+	* pyspec/framework.py(SpecBase.spec_name()): use above method.
+
+Thu Dec 27 17:14:34 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* new version 0.50 release
+
+Thu Dec 27 13:24:16 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/util.py: add MultiDeligator class
+
+	* pyspec/framework.py: add begin_test(), finish_test()
+
+	* pyspec/textui.pyi(TextSpecTestResult):
+		move printing operations from TestRunner to finish_test()
+
+Wed Dec 26 13:31:25 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* spec/behavior_pyspec_dbc.py: new spec file
+
+* pyspec/dbc.py: new feature is added!(Design by Contract)
+
+Thu Nov 29 16:52:24 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* new version 0.49 release
+
+Thu Nov 29 16:28:32 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/wxui/stackviewer.py (StackViewer): fix stack viewer
+
+Thu Nov 29 14:58:29 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/wxui/presenter.py (print_console()): add cr when report_out
+
+Thu Nov 29 14:07:16 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/__init__.py (data_provider()): add group argument
+
+Wed Nov 28 20:48:38 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/wxui/controller.py: support wxPython 2.8.6.1
+
+	* pyspec/wxui/util.py (get_resource_path()): spec test can run by wxui
+
+Wed Nov 28 17:32:26 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* new version 0.48 release.
+
+Mon Nov 26 20:01:04 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/framework.py (_direct_product_test_data()): add multi key support
+
+Mon Nov 12 15:16:26 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* new version 0.47 release.
+
+Mon Nov 12 14:38:02 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* spec/behavior_pyspec_outer_data.py: new
+
+	* pyspec/framework.py (SpecTestTrigger.run): add data_provider call
+
+	* pyspec/framework.py (SpecMethod.generate_test_data): add
+
+	* pyspec/framework.py (SpecTestResult.start_test): append test param
+
+	* pyspec/framework.py (_direct_product_test_data): new
+
+	* pyspec/textui.py (TextSpecTestResult.start_test): append test param
+
+Fri Nov 09 19:18:58 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* pyspec/__init__.py (data_provider): add new decorator method
+
+	* pyspec/__init__.py (decorator classes): delete unused parameter
+
+Wed Nov 07 11:44:32 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* framework.py (SpecMethod.spec_name): add pyunit mode
+
+	* textui.py (TextSpecTestResult.start_test): fix context name when pyunit
+
+	* new version 0.46 release
+
+Wed Nov 07 11:11:35 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* new version 0.45 release
+
+Wed Nov 07 11:08:55 2007  Shibukawa Yoshiki  <yoshiki@shibu.jp>
+
+	* framework.py (SpecMethod.get_fixture): fix judgement that parent is TestCase.
+
+- 0.6(2006/06/08)
+wxPython test runner:
+  new Project Management.
+  fix Auto reload feature.
+
+- 0.3(2006/06/02)
+wxPython test runner:
+  fix Auto reload feature.
+
+- 0.2(2006/06/02)
+wxPython test runner:
+  new Auto reload feature.
+new Windows installer.
+
+- 0.1(2006/06/02)
+new PyUnitX core frameworks.
+new Text test runner.
+new wxPython test runner(alpha).
+new setup files.
