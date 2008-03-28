@@ -1,0 +1,181 @@
+====================
+ PySpec Usage Guide
+====================
+
+:Author: Shibukawa Yoshiki
+:Contact: yoshiki at shibu.jp
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+---------------------
+ Write and Run Specs
+---------------------
+
+Writing Specs
+=============
+
+In PySpec, the specification is represented in python function or method.
+These specification methods have special decorator.
+
+example::
+
+  # This is function style spec
+
+  @spec
+  def New_list_should_be_empty():
+      About(list()).should_be_empty()
+
+  # This is method style spec
+  class List_Behavior(object):
+    @spec
+    def New_list_should_be_empty():
+        About(list()).should_be_empty()
+
+If you want to share any objects between specifications and contexts
+(context is a setup method), you should write specs in class. PySpec
+creates one object per one spec. It doesn't pollute other test environment.
+
+PySpec searches specs from top level functions and classes. If you write
+specs in nested class, that will not be called.
+
+Running Specs on Console
+========================
+
+You have two ways to run console runner. First way is ``cuipyspec.py`` script.
+Another is writing startup code into your spec source files. It's easy.
+
+example::
+
+    from pyspec import *
+
+    # Define some specs here
+
+    if __name__ == "__main__":
+        run_test()
+
+You don't have to register your specs. PySpec searches all modules that are
+loaded in your interpreter automatically. So, this code can kick specs in
+it.
+
+If you want to run all specs that are divided into some files, creating
+startup script is the easiest.
+
+example::
+
+    from pyspec import*
+
+    import behavior_entities
+    import behavior_database_access
+    import behavior_views
+
+    run_test()
+
+If you have created a spec startup script file and added startup code into all
+your specs, you would be able to all tests and each test.
+
+CUI Runner options
+==================
+
+You can see the usage on console::
+
+    $ python behavior_pyspec.py --help
+
+========================== ==========================================================================
+--version                  show program's version number and exit
+-h, --help                 show this help message and exit
+-v, --verbose              make lots of information [default].
+-q, --quiet                ouput progress bar and result only
+-c, --color                color output
+-d, --check-docstring      verify test fails if the test has no docstring.
+-r, --reset-legacy-data    reset all legacy test data.
+--show-legacy-data         show recorded legacy test data.
+-g LANG, --language=LANG   change the report language(sometimes it needs -e). supported code: en, ja
+-e, --encode=OUTPUT_CODEC  set console encode
+--debug-pyspec             show pyspec internal error traceback.
+--reST_report=dirname      generate reST format report
+========================== ==========================================================================
+
+National Language Support
+-------------------------
+
+PySpec can change the error report's language. use option {{-g LANG}} or {{--language LANG}}.
+PySpec can accept {{en}} and {{ja}} now. If you want to create your own language, see
+{{pyspec/embedded/locale}} folder. This feature uses {{string.Template}} class.
+It's easy for Python Programmers!
+
+Running Specs on GUI
+====================
+
+You can use GUI runner too. Run ``wxpyspec.py`` script. You can load spec module file
+from ``[Project] - [Add module...]`` menu.
+
+:notice: Now I rebuilding GUI runner. There are some bugs and not fixed.
+
+If you want to run GUI startup code from your spec script, please add
+following code::
+
+  if __name__ == "__main__":
+      import pyspec.wxui.controller
+      controller = pyspec.wxui.controller.WxPySpecController(0)
+      controller.MainLoop()
+
+----------
+Spec Names
+----------
+
+The spec which have good name is good spec. In pyspec, you have 2 ways to set the name.
+These spec names will appear in the result report.
+
+Method Name
+===========
+
+Using method name is more simple way.
+
+================================== ==============================
+Method Name                        Spec Name
+================================== ==============================
+A_stack_which_have_one_value()     A stack which have one value
+version_info__in_sys_module()      version_info in sys module
+one_of__test_method__should_fail() one of test_method should fail
+================================== ==============================
+
+This feature is implemented in pyspec.util.create_spec_name().
+
+Docstring
+=========
+
+Docstring is used for the spec names. Python 2.X can accept ASCII names only as a method name.
+This function is for programmers in Asia.
+
+If you write docstring in context method and spec method, the first line of docstring
+is used as a spec name.
+
+PySpec gets docstring encoding from the first line of source code. If you want to use
+Japanese or Chinese or any languages, you should write as following::
+
+    # -*- coding: utf8 -*-
+
+Pyspec can accept any codec which is installed in python.
+
+example::
+
+    class StackBehavior(object):
+        @context
+        def A_stack_with_one_item(self):
+            """Youso wo hitotsu motsu stack."""
+            self.stack = Stack()
+            self.stack.push("one item")
+
+        @spec
+        def should_not_be_empty(self):
+            """kara dewa nai."""
+            About(self.stack).should_not_be_empty()
+
+result::
+
+    Youso wo hitotsu motsu stack
+        kara dewa nai ... OK
+
+This sample docstrings are Japanese pronunciation in English.
+Of course, you can write real Japanese.

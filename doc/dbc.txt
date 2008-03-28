@@ -1,0 +1,89 @@
+=================================
+ PySpec Design by Contract Guide
+=================================
+
+:Author: Shibukawa Yoshiki
+:Contact: yoshiki at shibu.jp
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+*This feature was born recently. I don't use it enough.*
+
+Design by Contract(DbC) comes from Eiffle. xUnit tests over interface.
+DbC tests from more internal side than xUnit(I think).
+
+PySpec supports Design by Contract. You can write any condition checkers
+into your application.
+
+This sample file is ``pyspec/sample/sample_dbc.py``.
+
+-------------------------------------
+How to write DbC verification methods
+-------------------------------------
+
+The class that supports Design by Contract feature should have ``DbCobject``
+base class, and call base class's ``__init__()`` methods.
+
+sample::
+
+  from pyspec.embedded import *
+  from pyspec.embedded.dbc import DbCobject, DbC
+
+  class Weight(DbCobject):
+      convert_table = {"kg":1.0, "kan":3.75, "pound":0.45359237}
+
+      def __init__(self, unit, value):
+          super(Weight, self).__init__()
+          self.set_unit(unit)
+          self.value = value
+
+      @DbC
+      def set_unit__pre(self, unit):
+          About(unit in self.convert_table).should_be_true()
+
+      def set_unit(self, unit):
+          self.unit = unit
+
+Verifying Methods
+=================
+
+If you have created methods that have following naming rule, PySpec would
+call these methods. And these methods should be decorated by @DbC.
+
+=============== =======================================================
+Naming Rule     Description
+=============== =======================================================
+``XXX__pre``    This method was called before the XXX method is called.
+``XXX__post``   This method was called after the XXX method is called.
+``__invariant`` This method was called after all methods are called.
+=============== =======================================================
+
+----------------------------------
+How to Run with Design by Contract
+----------------------------------
+
+There are two ways to run DbC.
+
+Run on PySpec
+=============
+
+You have to do nothing.
+
+Run on Your Own Application
+===========================
+
+At first, you should call ``pyspec.embedded.dbc.set_dbc_option()``.
+
+============= =====================================================
+Option        Description
+============= =====================================================
+``prepost``   Enable ``XXX__pre`` and ``XXX__post`` (default=False)
+``invariant`` Enable ``__invariant`` (default=False)
+============= =====================================================
+
+example::
+
+  pyspec.embedded.dbc.set_dbc_option(prepost=True, invariant=True)
+
+

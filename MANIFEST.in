@@ -1,0 +1,16 @@
+include MANIFEST.in README.txt ChangeLog.txt LICENSE.txt
+include *.py
+include htmldoc/*
+include resource/*
+include spec/*
+include doc/*
+include sample/*
+include pyspec/cuiaddin/*
+include pyspec/wxaddin/*
+exclude dist/*
+exclude build/*
+exclude *.pyc
+exclude *.pyo
+exclude nodist/*
+exclude */Thumbs.db
+exclude */.svn/*

@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>PySpec Legacy Code Test Guide</title>
+<meta name="author" content="Shibukawa Yoshiki" />
+<meta name="copyright" content="This document has been placed in the public domain." />
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="pyspec-legacy-code-test-guide">
+<h1 class="title">PySpec Legacy Code Test Guide</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Shibukawa Yoshiki</td></tr>
+<tr><th class="docinfo-name">Contact:</th>
+<td>yoshiki at shibu.jp</td></tr>
+<tr><th class="docinfo-name">Copyright:</th>
+<td>This document has been placed in the public domain.</td></tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#reference" id="id1" name="id1">Reference</a><ul>
+<li><a class="reference" href="#about-actual-value-should-not-be-changed" id="id2" name="id2"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_not_be_changed()</span></tt></a></li>
+<li><a class="reference" href="#test-proxy" id="id3" name="id3"><tt class="docutils literal"><span class="pre">test_proxy()</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#usage" id="id4" name="id4">Usage</a><ul>
+<li><a class="reference" href="#reset-history" id="id5" name="id5">Reset History</a></li>
+<li><a class="reference" href="#show-history" id="id6" name="id6">Show History</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#sample-code" id="id7" name="id7">Sample Code</a><ul>
+<li><a class="reference" href="#story" id="id8" name="id8">Story</a></li>
+<li><a class="reference" href="#st-step" id="id9" name="id9">1st Step</a></li>
+<li><a class="reference" href="#nd-step" id="id10" name="id10">2nd Step</a></li>
+<li><a class="reference" href="#rd-step" id="id11" name="id11">3rd Step</a></li>
+<li><a class="reference" href="#th-step" id="id12" name="id12">4th Step</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>This feature is experimental.</em></p>
+<p>This sample file is <tt class="docutils literal"><span class="pre">pyspec/sample/sample_dbc.py</span></tt>.</p>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="reference" name="reference">Reference</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="about-actual-value-should-not-be-changed" name="about-actual-value-should-not-be-changed"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_not_be_changed()</span></tt></a></h2>
+<p>This method is used for assertion not to change the value.
+When you would run tests at first, PySpec would record the
+value and the spec's result would become 'ignored'.
+After that, the recorded value will be used for checking
+the value.</p>
+<p>sample:</p>
+<pre class="literal-block">
+from pyspec.embedded import *
+from pyspec.embedded.dbc import DbCobject, DbC
+
+class Behavior_CARDatabase():
+    &#64;spec
+    def You_should_be_able_to_see_power(self):
+        G37 = CARDatabase.get(&quot;G37&quot;)
+        # if change the result, this spec will fail
+        About(G37.get_power()).should_not_be_changed()
+</pre>
+<p>If you change the module name or the class name or the spec name or
+the expression in <tt class="docutils literal"><span class="pre">About()</span></tt> , PySpec can't find the recorded values.
+So the spec always become 'ignored' and records the value whenever
+you change these names/expressions.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">reset=False</span></tt></td>
+<td>If this parameter is True, PySpec reset the record.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id3" id="test-proxy" name="test-proxy"><tt class="docutils literal"><span class="pre">test_proxy()</span></tt></a></h2>
+<p>This function is defined at <tt class="docutils literal"><span class="pre">pyspec.legacy_code</span></tt>.</p>
+<p>This function creates proxy object and wraps the target object in the proxy.
+At first you call the function of the target object through this proxy,
+a history of function calls would be recorded and the spec would be 'ignored'
+(neither success nor fail). Next time you run spec, PySpec verifies the
+function calls.</p>
+<p>This function is useful for checking the source code is not broken during
+refactoring/enhancing activities.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">target_object</span></tt></td>
+<td>The object you want to</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">hook_methods=[]</span></tt></td>
+<td>The method name list you want to record(default=all methods)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">runtime_option=None</span></tt></td>
+<td>This is backdoor for testing PySpec itself(see <tt class="docutils literal"><span class="pre">behavior_pyspec_legacy_code.py</span></tt>)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">check_return=True</span></tt></td>
+<td>This flag controls that PySpec verifies return values or doesn't</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">check_args=True</span></tt></td>
+<td>This flag controls that PySpec verifies method arguments or doesn't</td>
+</tr>
+</tbody>
+</table>
+<p>sample:</p>
+<pre class="literal-block">
+&#64;spec
+def check_log_value():
+    log = StringIO.StringIO()
+    log = test_proxy(log) # create log proxy
+    write_log(log)
+
+def write_log(log):
+    log.write(name())   # recording/verifying ``write()`` method call
+    log.write(score())  # recording/verifying ``write()`` method call
+</pre>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id4" id="usage" name="usage">Usage</a></h1>
+<p>You can control these features in command line. It's important to use them.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">-r,</span> <span class="pre">--reset-legacy-data</span></tt></td>
+<td>Reset the all recorded values.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">--show-legacy-data</span></tt></td>
+<td>Show the function call history in reST format.</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h2><a class="toc-backref" href="#id5" id="reset-history" name="reset-history">Reset History</a></h2>
+<p>After big refactoring, the behavior of your code wouldn't match the record.
+In this case, these specs would be failed every time. If your other specs have
+passed, you should reset the history. The new behavior after the refactoring
+becomes new code navigator.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id6" id="show-history" name="show-history">Show History</a></h2>
+<p>The history record of your code is good information to analyze it.
+You can see the history whenever you want.</p>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id7" id="sample-code" name="sample-code">Sample Code</a></h1>
+<p>There is a sample of legacy support function. See <tt class="docutils literal"><span class="pre">sample/rst2codeplex</span></tt>.
+If you want to run this sample, you need to install <tt class="docutils literal"><span class="pre">docutils</span></tt>.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id8" id="story" name="story">Story</a></h2>
+<p>Create new program from existing source code. New program generates
+CodePlex wiki format from reStructuredText. To create it, you use
+the <tt class="docutils literal"><span class="pre">docutils/writer/html4css1</span></tt> module.</p>
+<p>Actually, docutils is well tested product. But in this sample,
+it was treated as legacy product (that had no tests).</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id9" id="st-step" name="st-step">1st Step</a></h2>
+<p>At first, you need to find entry point. It's important step.
+If there is no entry point, you have to create or modify it.
+Docutils has useful function <tt class="docutils literal"><span class="pre">publish_string()</span></tt>.
+This sample uses the function.</p>
+<p>If you create it, DI or some technology help you.
+Actually, you should create the entry point after running
+the first spec and fail (It's basic rule of TDD).</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id10" id="nd-step" name="nd-step">2nd Step</a></h2>
+<p>You would write two specs. One is a basic style spec. And another spec uses
+the legacy code support method. Of course you can put together these methods.
+But you shouldn't do that. These methods have there own roles.</p>
+<p>spec:</p>
+<pre class="literal-block">
+class Behavior_rst2codeplex(object):
+    source_title = &quot;&quot;&quot;
+==========
+Test Title
+==========
+&quot;&quot;&quot;
+
+    &#64;context(group=1)
+    def Title_source(self):
+        self.result = publish_string(self.source_title, writer_name=&quot;codeplex&quot;,
+                writer=Writer(translator=CodePlexTranslator))
+
+    &#64;spec(group=1)
+    def can_convert_to_wiki1(self):
+        About(self.result).should_include(&quot;! Test Title&quot;)
+
+    &#64;context(group=2)
+    def Method_calls_in_createing_title(self):
+        def TranslatorWithProxy(document):
+            translator = CodePlexTranslator(document)
+            return test_proxy(translator, check_return=False)
+        self.writer = Writer(translator=TranslatorWithProxy)
+
+    &#64;spec(group=2)
+    def should_not_changed_for_title(self):
+        print publish_string(self.source_title, writer_name=&quot;codeplex&quot;,
+                writer=self.writer)
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id11" id="rd-step" name="rd-step">3rd Step</a></h2>
+<p>If you run this spec, the result would become fail. Copy
+<tt class="docutils literal"><span class="pre">docutils/writer/html4css1</span></tt> into your workspace and rename it.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Before</th>
+<th class="head">After</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">__init__.py</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">rst2codeplex.py</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">HTMLTranslator</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">CodePlexTranslator</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>After initialize steps, you can run these specs again.
+If errors become failures, you can see the function call history record:</p>
+<pre class="literal-block">
+$ python behavior_rst2codeplex.py --show-legacy-data
+
+method: method_call_should_not_changed_for_title
+================================================
+
+dispatch_visit(&lt;document ids=&quot;test-title&quot; names=&quot;test\ title&quot; source=&quot;&lt;string&gt;&quot; title=&quot;Test Title&quot;&gt;&lt;title&gt;Test Title&lt;/title&gt;&lt;/document&gt;)
+dispatch_visit(&lt;title&gt;Test Title&lt;/title&gt;)
+dispatch_visit(Test Title)
+dispatch_departure(Test Title)
+dispatch_departure(&lt;title&gt;Test Title&lt;/title&gt;)
+dispatch_departure(&lt;document ids=&quot;test-title&quot; names=&quot;test\ title&quot; source=&quot;&lt;string&gt;&quot; title=&quot;Test Title&quot;&gt;&lt;title&gt;Test Title&lt;/title&gt;&lt;/document&gt;)
+astext()
+</pre>
+<p>From this information and the source code, you can understand the function
+<tt class="docutils literal"><span class="pre">visit_title()</span></tt> creates the title string. After modifying the part of
+the method, the first spec would pass and second spec would fail.
+This legacy support refers old code behavior. So if the behavior is changed
+after refactoring or modification, this spec may be fail.</p>
+<p><tt class="docutils literal"><span class="pre">rst2codeplex.py</span></tt>:</p>
+<pre class="literal-block">
+elif isinstance(node.parent, nodes.document):
+    self.body.append('! ')
+    self.context.append('\n\n')
+    self.in_document_title = len(self.body)
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id12" id="th-step" name="th-step">4th Step</a></h2>
+<p>Now, you watched the first spec was passed.
+You reset the old function call history record:</p>
+<pre class="literal-block">
+$ python behavior_rst2codeplex.py --reset-legacy-data
+</pre>
+<p>The second spec refers new behavior. This spec can detect unexpected part
+of the code base was broken or not. It is one of insurance.
+If you repeat 2nd step-4th step, you will have many normal style specs and
+you can throw these insurance into a trash box.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

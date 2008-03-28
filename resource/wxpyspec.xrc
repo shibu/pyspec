@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource>
+  <object class="wxDialog" name="PYSPEC_CALL_STACK_DIALOG">
+    <title>PySpec: Call Stack Viewer</title>
+    <style>wxDEFAULT_DIALOG_STYLE|wxCAPTION|wxRESIZE_BORDER|wxRESIZE_BOX|wxCLOSE_BOX|wxMAXIMIZE_BOX|wxDIALOG_MODAL</style>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxNotebook">
+          <object class="notebookpage">
+            <label>Call Tree</label>
+            <object class="wxPanel">
+              <object class="wxGridBagSizer">
+                <object class="sizeritem">
+                  <object class="wxTreeCtrl" name="CALL_TREE">
+                    <style>wxTR_SINGLE</style>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>3</border>
+                  <cellpos>0, 0</cellpos>
+                  <cellspan>2, 1</cellspan>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Stack Info</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="STACK_INFO">
+                        <style>wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH2</style>
+                      </object>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>3</border>
+                      <minsize>250, 130</minsize>
+                      <cellpos>0, 1</cellpos>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>3</border>
+                  <cellpos>0, 1</cellpos>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Module Filter</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckListBox" name="MODULE_LIST">
+                        <content/>
+                      </object>
+                      <option>1</option>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>3</border>
+                      <cellpos>1, 1</cellpos>
+                    </object>
+                  </object>
+                  <option>1</option>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>3</border>
+                  <cellpos>1, 1</cellpos>
+                </object>
+                <growablecols>0</growablecols>
+                <growablerows>1</growablerows>
+              </object>
+            </object>
+          </object>
+          <object class="notebookpage">
+            <label>Call Graph</label>
+            <object class="wxPanel">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxButton" name="SAVE_BUTTON">
+                        <label>&amp;Save Call Graph</label>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>4</border>
+                    </object>
+                  </object>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxHtmlWindow" name="GRAPH_VIEWER">
+                    <htmlcode>&lt;HTML&gt;loading...&lt;/HTML&gt;</htmlcode>
+                  </object>
+                  <option>1</option>
+                  <flag>wxEXPAND|wxALIGN_CENTRE</flag>
+                  <border>8</border>
+                  <minsize>600,400</minsize>
+                  <ratio>1</ratio>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxButton" name="CLOSE_BUTTON">
+          <label>&amp;Close</label>
+        </object>
+      </object>
+    </object>
+  </object>
+  <object class="wxFrame" name="PYSPEC_MAIN_FRAME">
+    <title>PySpec wxSpecVerifier</title>
+    <object class="wxNotebook" name="PYSPEC_MAIN_TAB">
+      <object class="notebookpage">
+        <label>Spec Verifier</label>
+        <object class="wxSplitterWindow" name="">
+          <orientation>vertical</orientation>
+          <object class="wxPanel">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxPanel">
+                  <object class="wxStaticBoxSizer">
+                    <label>Spec Verifier Console</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxGridBagSizer">
+                        <object class="sizeritem">
+                          <object class="wxButton" name="VERIFY_BUTTON">
+                            <label>&amp;Verify</label>
+                          </object>
+                          <cellpos>0, 0</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="VERIFY_ALL_BUTTON">
+                            <label>Verify &amp;All</label>
+                            <default>1</default>
+                          </object>
+                          <cellpos>0, 1</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="RELOAD_BUTTON">
+                            <label>&amp;Reload</label>
+                          </object>
+                          <cellpos>0, 2</cellpos>
+                        </object>
+                        <vgap>4</vgap>
+                        <hgap>4</hgap>
+                        <growablecols>3</growablecols>
+                      </object>
+                      <option>1</option>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxPanel" name="PROGRESS_BAR_POSITION"/>
+                      <option>1</option>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>4</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxRadioBox" name="EXPLORER_OPTION">
+                        <label>Explorer Option</label>
+                        <content>
+                          <item>&amp;Show All</item>
+                          <item>&amp;Failures</item>
+                          <item>&amp;Ignored</item>
+                        </content>
+                        <selection>0</selection>
+                        <dimension>4</dimension>
+                        <style>wxRA_HORIZONTAL</style>
+                      </object>
+                      <flag>wxEXPAND</flag>
+                      <ratio>1</ratio>
+                    </object>
+                  </object>
+                </object>
+                <flag>wxALL|wxEXPAND</flag>
+                <border>3</border>
+              </object>
+              <object class="sizeritem">
+                <object class="wxTreeCtrl" name="SPEC_EXPLORER">
+                  <style>wxTR_HIDE_ROOT|wxTR_MULTIPLE|wxTR_EXTENDED|wxTR_DEFAULT_STYLE</style>
+                </object>
+                <option>1</option>
+                <flag>wxALL|wxEXPAND</flag>
+                <border>3</border>
+                <ratio>1</ratio>
+              </object>
+            </object>
+          </object>
+          <sashpos>250</sashpos>
+          <minsize>6</minsize>
+          <object class="wxSplitterWindow">
+            <object class="wxListCtrl" name="SPEC_RESULT_LIST">
+              <style>wxLC_REPORT</style>
+            </object>
+            <object class="wxNotebook" name="PYSPEC_INSPECT_TAB">
+              <object class="notebookpage">
+                <label>Verify Result</label>
+                <object class="wxPanel">
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Spec Information</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxFlexGridSizer">
+                            <cols>3</cols>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Spec Name</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxTextCtrl" name="SPEC_NAME">
+                                <style>wxTE_READONLY</style>
+                              </object>
+                              <flag>wxEXPAND</flag>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxButton" name="CALL_STACK_BUTTON">
+                                <label>&amp;Call Stack</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Spec Method</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxTextCtrl" name="SPEC_METHOD_INFO">
+                                <style>wxTE_READONLY</style>
+                              </object>
+                              <flag>wxEXPAND</flag>
+                            </object>
+                            <object class="spacer">
+                              <size>0,0</size>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>File (Line)</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxTextCtrl" name="SPEC_FILE_INFO">
+                                <style>wxTE_READONLY</style>
+                              </object>
+                              <flag>wxEXPAND</flag>
+                            </object>
+                            <vgap>1</vgap>
+                            <hgap>1</hgap>
+                            <growablecols>1</growablecols>
+                            <object class="spacer">
+                              <size>0,0</size>
+                            </object>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>3</border>
+                          <ratio>1</ratio>
+                        </object>
+                      </object>
+                      <flag>wxALL|wxEXPAND</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>PySpec Output</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxTextCtrl" name="VERIFY_RESULT">
+                            <style>wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH</style>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>2</border>
+                          <ratio>1</ratio>
+                        </object>
+                      </object>
+                      <option>1</option>
+                      <flag>wxALL|wxEXPAND</flag>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <style>wxNB_BOTTOM</style>
+              <object class="notebookpage">
+                <label>Console Out</label>
+                <object class="wxTextCtrl" name="CONSOLE_OUT">
+                  <style>wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH</style>
+                </object>
+              </object>
+            </object>
+            <orientation>horizontal</orientation>
+            <sashpos>400</sashpos>
+            <minsize>100</minsize>
+            <style>wxSP_NOBORDER</style>
+          </object>
+          <style>wxSP_NOBORDER</style>
+        </object>
+        <selected>1</selected>
+      </object>
+      <style>wxNB_DEFAULT</style>
+    </object>
+    <object class="wxMenuBar" name="">
+      <object class="wxMenu" name="">
+        <label>&amp;File</label>
+        <object class="wxMenuItem" name="MENU_FILE_NEW">
+          <label>&amp;New Project...</label>
+          <accel>Ctrl-N</accel>
+        </object>
+        <object class="wxMenuItem" name="MENU_FILE_OPEN">
+          <label>&amp;Open Project...</label>
+          <accel>Ctrl-O</accel>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="MENU_FILE_SAVE">
+          <label>&amp;Save Projects</label>
+          <accel>Ctrl-S</accel>
+        </object>
+        <object class="wxMenuItem" name="MENU_FILE_SAVEAS">
+          <label>Save Project &amp;As...</label>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenu" name="MENU_FILE_RECENT_FILES">
+          <label>&amp;Recent Files</label>
+          <object class="wxMenuItem" name="MENU_FILE_RECENT_FILES_1">
+            <label>1.</label>
+          </object>
+          <object class="wxMenuItem" name="MENU_FILE_RECENT_FILES_2">
+            <label>2.</label>
+          </object>
+          <object class="wxMenuItem" name="MENU_FILE_RECENT_FILES_3">
+            <label>3.</label>
+          </object>
+          <object class="wxMenuItem" name="MENU_FILE_RECENT_FILES_4">
+            <label>4.</label>
+          </object>
+          <object class="wxMenuItem" name="MENU_FILE_RECENT_FILES_5">
+            <label>5.</label>
+          </object>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="MENU_FILE_QUIT">
+          <label>&amp;Quit</label>
+          <accel>Ctrl-Q</accel>
+        </object>
+      </object>
+      <object class="wxMenu">
+        <label>&amp;Project</label>
+        <object class="wxMenuItem" name="MENU_PROJECT_ADD">
+          <label>&amp;Add Module...</label>
+          <accel>Ctrl-A</accel>
+        </object>
+        <object class="wxMenuItem" name="MENU_PROJECT_DEL">
+          <label>&amp;Delete Module...</label>
+          <accel>Ctrl-D</accel>
+        </object>
+        <object class="wxMenuItem" name="MENU_PROJECT_FIND">
+          <label>&amp;Search Module in Directory...</label>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="MENU_PROJECT_RELOAD">
+          <label>&amp;Reload All Modules</label>
+        </object>
+        <object class="wxMenuItem" name="MENU_PROJECT_VERIFY_ALL">
+          <label>&amp;Verify All Specs</label>
+          <accel>Ctrl-V</accel>
+        </object>
+        <object class="wxMenuItem" name="MENU_PROJECT_SAVEXML">
+          <label>Save Results as &amp;XML...</label>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="MENU_PROJECT_CONFIG">
+          <label>Project &amp;Configuration...</label>
+        </object>
+      </object>
+      <object class="wxMenu" name="MENU_ADDIN">
+        <label>&amp;Addin</label>
+      </object>
+      <object class="wxMenu">
+        <label>&amp;Help</label>
+        <object class="wxMenuItem" name="MENU_HELP_HELP">
+          <label>PyUnitX &amp;Help</label>
+          <accel>F1</accel>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="MENU_HELP_ABOUT">
+          <label>&amp;About PyUnitX...</label>
+        </object>
+      </object>
+    </object>
+    <object class="wxStatusBar" name="STATUSBAR">
+      <fields>6</fields>
+      <widths>-1, 100, 100, 80, 80, 180</widths>
+      <style>wxST_SIZEGRIP</style>
+    </object>
+    <size>850, 500</size>
+  </object>
+  <object class="wxDialog" name="PYSPEC_CONFIG_DIALOG">
+    <title>PySpec - wxSpecVerifier Options</title>
+    <centered>1</centered>
+    <style>wxDEFAULT_DIALOG_STYLE|wxCAPTION|wxCLOSE_BOX|wxDIALOG_MODAL</style>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+              <object class="wxRadioBox" name="CONFIG_FUNCTION_HOOK">
+                <label>Hook Function Call</label>
+                <content>
+                  <item>Support Call Tree and Structure Map(use profiler API)</item>
+                  <item>Support Call Tree and Structure Map(use debugger API)</item>
+                  <item>No hook(fast)</item>
+                </content>
+                <selection>0</selection>
+                <enabled>0</enabled>
+              </object>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Module Reloader Options</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxCheckBox" name="CONFIG_AUTO_RELOAD">
+                    <label>Auto Reload</label>
+                  </object>
+                  <cellpos>0, 1</cellpos>
+                  <flag>wxALL</flag>
+                  <border>2</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxCheckBox" name="CONFIG_AUTO_RUN">
+                    <label>Auto Run</label>
+                  </object>
+                  <cellpos>1, 1</cellpos>
+                  <flag>wxALL</flag>
+                  <border>2</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxCheckBox" name="CONFIG_FAIL_ACTIVATE">
+                    <label>Activate wxRunner Dialog when fail</label>
+                  </object>
+                  <cellpos>2, 1</cellpos>
+                  <flag>wxALL</flag>
+                  <border>2</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxCheckBox" name="CONFIG_SUCCESS_ACTIVATE">
+                    <label>Activate wxRunner Dialog when success</label>
+                  </object>
+                  <cellpos>3, 1</cellpos>
+                  <flag>wxALL</flag>
+                  <border>2</border>
+                </object>
+              </object>
+              <option>1</option>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>5</border>
+            </object>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <ratio>1</ratio>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticLine"/>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton" name="CONFIG_CANCEL">
+                <label>Cancel</label>
+              </object>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="CONFIG_OK">
+                <label>OK</label>
+              </object>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALIGN_RIGHT</flag>
+        <border>5</border>
+      </object>
+    </object>
+  </object>
+  <object class="wxDialog" name="PYSPEC_GRAPHVIZ_DIALOG">
+    <title>PySpec: Graphviz Dialog</title>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>Category:</label>
+              </object>
+              <border>4</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxComboBox" name="GRAPH_CATEGORY">
+                <content/>
+                <style>wxCB_READONLY</style>
+              </object>
+              <border>4</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="GRAPH_SAVE_BUTTON">
+                <label>&amp;Save Map</label>
+              </object>
+              <border>4</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALIGN_RIGHT</flag>
+        <border>4</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxHtmlWindow" name="GRAPH_VIEWER">
+          <htmlcode>&lt;HTML&gt;loading...&lt;/HTML&gt;</htmlcode>
+        </object>
+        <option>1</option>
+        <flag>wxEXPAND|wxALIGN_CENTRE</flag>
+        <border>8</border>
+        <minsize>600,400</minsize>
+        <ratio>1</ratio>
+      </object>
+      <object class="sizeritem">
+        <object class="wxButton" name="GRAPH_CLOSE_BUTTON">
+          <label>&amp;Close</label>
+        </object>
+        <flag>wxALIGN_CENTRE</flag>
+      </object>
+    </object>
+    <style>wxDEFAULT_DIALOG_STYLE|wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX|wxMAXIMIZE_BOX|wxDIALOG_MODAL</style>
+  </object>
+  <object class="wxDialog" name="PYSPEC_FEATURE_CONFIG_DIALOG">
+    <title>PySpec: wxSpecTester Options</title>
+    <centered>1</centered>
+    <style>wxDEFAULT_DIALOG_STYLE|wxCAPTION|wxCLOSE_BOX|wxDIALOG_MODAL</style>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Test Loader Options</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxCheckBox">
+                    <label>*Load doctest</label>
+                  </object>
+                </object>
+              </object>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Test Runner Options</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxFlexGridSizer">
+                    <cols>2</cols>
+                    <rows>4</rows>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox">
+                        <label>*Trace method call(little slow)</label>
+                      </object>
+                    </object>
+                    <object class="spacer">
+                      <size>0,0</size>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticText">
+                        <label>Need for call stack, map fucntion</label>
+                      </object>
+                    </object>
+                    <object class="spacer">
+                      <size>0,0</size>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox">
+                        <label>*Run doctest</label>
+                      </object>
+                      <border>2</border>
+                    </object>
+                    <object class="spacer">
+                      <size>0,0</size>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox">
+                        <label>*Run @assumption_test</label>
+                      </object>
+                      <border>2</border>
+                    </object>
+                    <object class="spacer">
+                      <size>0,0</size>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox">
+                        <label>*Run @learning_test</label>
+                      </object>
+                      <border>2</border>
+                    </object>
+                    <object class="spacer">
+                      <size>0,0</size>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox">
+                        <label>*Timeout</label>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxSpinCtrl">
+                        <value>0</value>
+                        <min>0</min>
+                        <style></style>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticText">
+                        <label>Source Code Encoding</label>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl">
+                        <value>utf-8</value>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Module Reloader Options</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxCheckBox">
+                    <label>Auto Reload</label>
+                  </object>
+                  <cellpos>0, 1</cellpos>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxCheckBox">
+                    <label>Auto Run</label>
+                  </object>
+                  <cellpos>1, 1</cellpos>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxCheckBox">
+                    <label>Activate wxRunner Dialog when fail</label>
+                  </object>
+                  <cellpos>2, 1</cellpos>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxCheckBox">
+                    <label>Activate wxRunner Dialog when success</label>
+                  </object>
+                  <cellpos>3, 1</cellpos>
+                </object>
+              </object>
+              <option>1</option>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>5</border>
+            </object>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <ratio>1</ratio>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticText">
+          <label>  '*' marked options don't work, sorry.</label>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton">
+                <label>Cancel</label>
+              </object>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton">
+                <label>OK</label>
+              </object>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALIGN_RIGHT</flag>
+        <border>5</border>
+      </object>
+    </object>
+  </object>
+</resource>

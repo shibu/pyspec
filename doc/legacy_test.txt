@@ -1,0 +1,233 @@
+==============================
+ PySpec Legacy Code Test Guide
+==============================
+
+:Author: Shibukawa Yoshiki
+:Contact: yoshiki at shibu.jp
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+*This feature is experimental.*
+
+This sample file is ``pyspec/sample/sample_dbc.py``.
+
+---------
+Reference
+---------
+
+``About('actual value').should_not_be_changed()``
+=================================================
+
+This method is used for assertion not to change the value.
+When you would run tests at first, PySpec would record the
+value and the spec's result would become 'ignored'.
+After that, the recorded value will be used for checking
+the value.
+
+sample::
+
+  from pyspec.embedded import *
+  from pyspec.embedded.dbc import DbCobject, DbC
+
+  class Behavior_CARDatabase():
+      @spec
+      def You_should_be_able_to_see_power(self):
+          G37 = CARDatabase.get("G37")
+          # if change the result, this spec will fail
+          About(G37.get_power()).should_not_be_changed()
+
+If you change the module name or the class name or the spec name or
+the expression in ``About()`` , PySpec can't find the recorded values.
+So the spec always become 'ignored' and records the value whenever
+you change these names/expressions.
+
+=============== ===================================================
+Option          Description
+=============== ===================================================
+``reset=False`` If this parameter is True, PySpec reset the record.
+=============== ===================================================
+
+``test_proxy()``
+================
+
+This function is defined at ``pyspec.legacy_code``.
+
+This function creates proxy object and wraps the target object in the proxy.
+At first you call the function of the target object through this proxy,
+a history of function calls would be recorded and the spec would be 'ignored'
+(neither success nor fail). Next time you run spec, PySpec verifies the
+function calls.
+
+This function is useful for checking the source code is not broken during
+refactoring/enhancing activities.
+
+======================= ==================================================================================
+Option                  Description
+======================= ==================================================================================
+``target_object``       The object you want to
+``hook_methods=[]``     The method name list you want to record(default=all methods)
+``runtime_option=None`` This is backdoor for testing PySpec itself(see ``behavior_pyspec_legacy_code.py``)
+``check_return=True``   This flag controls that PySpec verifies return values or doesn't
+``check_args=True``     This flag controls that PySpec verifies method arguments or doesn't
+======================= ==================================================================================
+
+sample::
+
+  @spec
+  def check_log_value():
+      log = StringIO.StringIO()
+      log = test_proxy(log) # create log proxy
+      write_log(log)
+
+  def write_log(log):
+      log.write(name())   # recording/verifying ``write()`` method call
+      log.write(score())  # recording/verifying ``write()`` method call
+
+-------
+ Usage
+-------
+
+You can control these features in command line. It's important to use them.
+
+=========================== ==============================================
+Option                      Description
+=========================== ==============================================
+``-r, --reset-legacy-data`` Reset the all recorded values.
+``--show-legacy-data``      Show the function call history in reST format.
+=========================== ==============================================
+
+Reset History
+=============
+
+After big refactoring, the behavior of your code wouldn't match the record.
+In this case, these specs would be failed every time. If your other specs have
+passed, you should reset the history. The new behavior after the refactoring
+becomes new code navigator.
+
+Show History
+============
+
+The history record of your code is good information to analyze it.
+You can see the history whenever you want.
+
+-------------
+ Sample Code
+-------------
+
+There is a sample of legacy support function. See ``sample/rst2codeplex``.
+If you want to run this sample, you need to install ``docutils``.
+
+Story
+=====
+
+Create new program from existing source code. New program generates
+CodePlex wiki format from reStructuredText. To create it, you use
+the ``docutils/writer/html4css1`` module.
+
+Actually, docutils is well tested product. But in this sample,
+it was treated as legacy product (that had no tests).
+
+1st Step
+========
+
+At first, you need to find entry point. It's important step.
+If there is no entry point, you have to create or modify it.
+Docutils has useful function ``publish_string()``.
+This sample uses the function.
+
+If you create it, DI or some technology help you.
+Actually, you should create the entry point after running
+the first spec and fail (It's basic rule of TDD).
+
+2nd Step
+========
+
+You would write two specs. One is a basic style spec. And another spec uses
+the legacy code support method. Of course you can put together these methods.
+But you shouldn't do that. These methods have there own roles.
+
+spec::
+
+    class Behavior_rst2codeplex(object):
+        source_title = """
+    ==========
+    Test Title
+    ==========
+    """
+
+        @context(group=1)
+        def Title_source(self):
+            self.result = publish_string(self.source_title, writer_name="codeplex",
+                    writer=Writer(translator=CodePlexTranslator))
+
+        @spec(group=1)
+        def can_convert_to_wiki1(self):
+            About(self.result).should_include("! Test Title")
+
+        @context(group=2)
+        def Method_calls_in_createing_title(self):
+            def TranslatorWithProxy(document):
+                translator = CodePlexTranslator(document)
+                return test_proxy(translator, check_return=False)
+            self.writer = Writer(translator=TranslatorWithProxy)
+
+        @spec(group=2)
+        def should_not_changed_for_title(self):
+            print publish_string(self.source_title, writer_name="codeplex",
+                    writer=self.writer)
+
+3rd Step
+========
+
+If you run this spec, the result would become fail. Copy
+``docutils/writer/html4css1`` into your workspace and rename it.
+
+================== ======================
+Before             After
+================== ======================
+``__init__.py``    ``rst2codeplex.py``
+``HTMLTranslator`` ``CodePlexTranslator``
+================== ======================
+
+After initialize steps, you can run these specs again.
+If errors become failures, you can see the function call history record::
+
+    $ python behavior_rst2codeplex.py --show-legacy-data
+
+    method: method_call_should_not_changed_for_title
+    ================================================
+
+    dispatch_visit(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title></document>)
+    dispatch_visit(<title>Test Title</title>)
+    dispatch_visit(Test Title)
+    dispatch_departure(Test Title)
+    dispatch_departure(<title>Test Title</title>)
+    dispatch_departure(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title></document>)
+    astext()
+
+From this information and the source code, you can understand the function
+``visit_title()`` creates the title string. After modifying the part of
+the method, the first spec would pass and second spec would fail.
+This legacy support refers old code behavior. So if the behavior is changed
+after refactoring or modification, this spec may be fail.
+
+``rst2codeplex.py``::
+
+    elif isinstance(node.parent, nodes.document):
+        self.body.append('! ')
+        self.context.append('\n\n')
+        self.in_document_title = len(self.body)
+
+4th Step
+========
+
+Now, you watched the first spec was passed.
+You reset the old function call history record::
+
+    $ python behavior_rst2codeplex.py --reset-legacy-data
+
+The second spec refers new behavior. This spec can detect unexpected part
+of the code base was broken or not. It is one of insurance.
+If you repeat 2nd step-4th step, you will have many normal style specs and
+you can throw these insurance into a trash box.

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource>
+  <object class="wxPanel" name="CLASSBROWSER">
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxSplitterWindow" name="SPLITTER">
+          <orientation>vertical</orientation>
+          <object class="wxNotebook">
+            <object class="notebookpage">
+              <label>Browse</label>
+              <object class="wxPanel">
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxSplitterWindow">
+                      <orientation>horizontal</orientation>
+                      <sashpos>400</sashpos>
+                      <minsize>100</minsize>
+                      <style>wxSP_NOBORDER</style>
+                      <object class="wxTreeCtrl" name="MODULE_TREE">
+                        <style>wxTR_HIDE_ROOT|wxTR_EXTENDED|wxTR_DEFAULT_STYLE</style>
+                      </object>
+                      <object class="wxTreeCtrl" name="CLASS_TREE">
+                        <style>wxTR_HIDE_ROOT|wxTR_EXTENDED|wxTR_DEFAULT_STYLE</style>
+                      </object>
+                    </object>
+                    <option>1</option>
+                    <flag>wxALL|wxEXPAND</flag>
+                    <border>3</border>
+                    <ratio>1</ratio>
+                  </object>
+                </object>
+              </object>
+              <selected>1</selected>
+            </object>
+            <object class="notebookpage">
+              <label>Search</label>
+              <object class="wxPanel">
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxPanel">
+                      <size>500, 30</size>
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxComboBox" name="SEARCH_WORD">
+                            <content/>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="SEARCH_BUTTON">
+                            <label>Search</label>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                    <flag>wxALL|wxEXPAND</flag>
+                    <border>3</border>
+                    <ratio>1</ratio>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxListCtrl" name="SEARCH_RESULT">
+                      <style>wxLC_REPORT</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxALL|wxEXPAND</flag>
+                    <border>3</border>
+                    <ratio>1</ratio>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+          <sashpos>250</sashpos>
+          <minsize>6</minsize>
+          <style>wxSP_NOBORDER</style>
+          <object class="wxHtmlWindow" name="HTML_VIEW">
+            <style>wxSUNKEN_BORDER</style>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <ratio>1</ratio>
+      </object>
+    </object>
+  </object>
+</resource>

@@ -1,0 +1,362 @@
+﻿==================
+ PySpec Reference
+==================
+
+:Author: Shibukawa Yoshiki
+:Contact: yoshiki at shibu.jp
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+------------
+ Decorators
+------------
+
+``@spec``
+=========
+
+This decorator makes function/method to specification.
+This decorator can accept module function and method.
+
+example::
+
+  @spec
+  def stack_should_empty():
+    """Stack can be checked if empty or not."""
+    stack = Stack()
+    About(stack).should_empty()
+
+============ ======================================
+Parameter    Description
+============ ======================================
+``expected`` This spec should raise the exception.
+``group``    Select the contexts and finalizes.
+``dbc``      Select DbC future on/off(default=True)
+============ ======================================
+
+``@context``
+============
+
+This decorator makes function/method to setup method.
+Context methods was called before each specifications.
+In PySpec, almost all setup should be written in setup.
+You will write more context methods than setup method of
+other TDD frameworks.
+
+If you don't use '``group``' parameter, all context methods
+were called before each spec methods.
+
+============ =====================================
+Parameter    Description
+============ =====================================
+``group``    Set the context method's group.
+============ =====================================
+
+``@spec_finalize``
+==================
+
+This decorator makes function/method to teardown method.
+finalize method was called after each specification methods.
+
+============ =====================================
+Parameter    Description
+============ =====================================
+``group``    Set the finalize method's group.
+============ =====================================
+
+``@class_context``
+==================
+
+The methods which have this decorator were called only first time
+before all contexts. If you want to set any variables in
+@class_context method, the variable should be class variable.
+
+``@class_finalize``
+===================
+
+The methods which have this decorator were called only last time
+after all finalize. This method would be called even if the spec
+failed.
+
+``@ignore``
+===========
+
+The spec method which have this decorator was ignored.
+
+example::
+
+  @spec
+  @ignore
+  def stack_can_have_any_objects():
+    # not implemented yet! sorry!
+    pass
+
+``@data_provider``
+==================
+
+This decorator supports reusing spec methods. The method that has this
+decorator supplies external data for the spec method. This idea comes from
+TestNG. Thanks!
+
+This decorated method has been called before generating spec object.
+So the decorated method should be class method.
+
+example::
+
+  def fibonacci(n):
+      if n == 0:
+          return 0
+      if n <= 2:
+          return 1
+      return fibonacci(n-1) + fibonacci(n-2)
+
+
+  class Behavior_fibonacci(object):
+      @classmethod
+      @data_provider(cls, key=("n", "expected_return"))
+      def create_data_for_test(cls):
+          return ((0, 0), (1, 1), (2, 1), (3, 2))
+
+      @spec
+      def fibonacci_should_return_expected_value(self, n, expected_return):
+          About(fibonacci(n)).should_equal(expected_return)
+
+result::
+
+  fibonacci should return expected value <args=expected_return:0 n:0> ... OK
+  fibonacci should return expected value <args=expected_return:1 n:1> ... OK
+  fibonacci should return expected value <args=expected_return:1 n:2> ... OK
+  fibonacci should return expected value <args=expected_return:2 n:3> ... OK
+
+  ----------------------------------------------------------------------
+  Ran 4 specs in 0.087s
+  OK
+
+============ =====================================
+Parameter    Description
+============ =====================================
+``key``      Set the spec method's parameter name.
+``group``    Set the data provider method's group.
+============ =====================================
+
+There are three ways to supply external data.
+
+Single Key Data Providing
+-------------------------
+
+The ``key`` parameter should be string. And the method has to return
+sequence.
+
+sample::
+
+  @classmethod
+  @data_provider(key="weather")
+  def provide_weather(cls):
+      return ("fine", "rain", "snow")
+
+Multi Key Data Providing
+------------------------
+
+The ``key`` parameter should be ``tuple`` or ``list`` that contains strings.
+The method has to return 2D sequence.
+
+sample::
+
+  @classmethod
+  @data_provider(key=("n", "expected_return"))
+  def create_data_for_test(cls):
+      return ((0, 0), (1, 1), (2, 1), (3, 2))
+
+Multi Key External Data with Multi Data Provider
+------------------------------------------------
+
+You can combine some data providers.
+
+sample::
+
+  @classmethod
+  @data_provider(key="time")
+  def provide_time(cls):
+      return ("morning", "noon", "night")
+
+  @classmethod
+  @data_provider(key="city")
+  def provide_cities(cls):
+      return ("Tokyo", "Osaka", "Nagoya")
+
+  @spec
+  def check_something(self, time, city)
+      # do something
+
+----------------------
+ Verification Methods
+----------------------
+
+``About('actual value').should_equal('expected value')``
+========================================================
+
+This method asserts the values are same. There is a counter
+method ``should_not_equal()`` too.
+
+``About('actual value').should_equal_nearly('expected value', delta=None)``
+===========================================================================
+
+This method asserts the float values are same. You can set the delta.
+If you wouldn't pass delta value, PySpec set the delta to 1% of expected
+value.
+
+There is ``should_not_equal_nearly()`` too.
+
+``About('actual value').should_be_true()``
+==========================================
+
+This method assert the value are True. In pyspec you can use should_be_false() too.
+
+``About('actual value').should_be_same('expected value')``
+==========================================================
+
+If results of id() would be different, this method would fail.
+You can use should_not_be_same() too.
+
+``About('sequence').should_include('value')``
+=============================================
+
+This method verifies weather the value is in the sequence. That sequence
+should have ``__contains__()`` or ``__iter__()``.
+You can use should_not_include() too.
+
+``About('actual value').should_be_in('sequence')``
+==================================================
+
+This method verifies weather the value is in the sequence. That sequence
+should support ``in``. You can use should_not_be_in() too.
+This is a counter method of ``About().should_include()``.
+
+``About('sequence').should_be_empty()``
+=======================================
+
+This method verifies weather the sequence is empty. That sequence should
+have ``__len__()`` method. You can use ``should_not_be_empty()`` too.
+
+``Verify.fail()``
+=================
+
+This method fails the test. You can use this method to assert the pass
+was wrong::
+
+  @spec
+  def exception_should_be_raised():
+    try:
+      do_something()
+      Verify.fail()
+    except ValueError:
+      pass
+
+In the xUnit which can not treat the exception, a programmer must use
+any method similar to this method to write tests for exceptions.
+In PySpec, you can write the spec of exception more smartly::
+
+  @spec(expect=ValueError)
+  def exception_should_be_raised():
+    do_something()
+
+If you have better sample of this method, please send it to me.
+
+``Verify.ignore()``
+===================
+
+Ignore the test. It has the same effect as ``@ignore``.
+
+example::
+
+  @spec
+  def connect_to_SQLServer():
+    if sys.platform != "win32":
+      Verify.ignore()
+    do_something()
+
+---------------------
+ Simple Mock Objects
+---------------------
+
+These objects are defined in ``pyspec.mockobject`` module.
+This mock module is implemented for testing pyspec itself.
+
+``MockObject`` / ``MockObjectRecorder``
+=======================================
+
+These are basic mock classes. These classes work together.
+``MockObjectRecorder`` object records all method call.
+``MockObjectRecorder._get_mock_object_()`` generates ``MockObject`` object
+which records what method should be called.
+This ``MockObject`` object verifies the method call.
+You can record parameters and return value.
+
+example::
+
+  recorder = MockObjectRecorder()
+  recorder.add(1, 2) == 3             # this method will return 3
+  calc = recorder._get_mock_object_() # stop recording
+
+  print calc(1, 2)    # => 3
+  calc._verify_()     # if some record methods were not called, raise AssertionError
+
+You should write the code that operates ``MockObjectRecorder``
+in context method, and call ``_verify_()`` method in spec method.
+
+Following table shows special methods of ``MockObject`` classes.
+Except these methods, recorder object can accept any method call.
+
+========================================== ====================================================================
+``MockObjectRecorder(is_print=False)``     ``is_print=True`` option is useful for traditional printf debugging.
+``MockObjectRecorder._get_mock_object_()`` Create mock object and return.
+``MockObject._verify_()``                  Call this method at the end of spec methods.
+========================================== ====================================================================
+
+``MockObjectRecorder`` can record flexible method call.
+
+example::
+
+  recorder = MockObjectRecorder()      # create recorder first!
+  recorder.add(1, 2).repeat(3) == 3    # this method will be called 3 times
+  recorder.mul().with_any_parameter()  # this method can accept any parameter
+
+``FileMockObject``
+==================
+
+This is the mock object for file writing.
+This verifies between the content of write method parameters and the string of
+constructor parameter.
+
+This object only has ``write()`` method and not has ``writelines()``
+and other methods.
+
+===================================== =============================================================
+``FileMockObject(expected_contents)`` Set the expected string and create ``FileMockObject`` object.
+``write(actual)``                     Check the actual output with the expected string
+``_verify_()``                        Call this method at the end of spec methods.
+===================================== =============================================================
+
+``MockSocket``
+==============
+
+This is the mock object for ``socket``. This object supports blocking mode and
+non-blocking mode. If in blocking mode, socket.error would be raised
+when all recv messages would be used. And in non-blocking mode, ``AssertionError``
+would be raised.
+
+==================================== ================================================================================
+``MockSocket(recv=None, send=None)`` Create ``MockSocket`` object. You can set recv/send messages(as list of array).
+``_add_recv_message_(\*message)``    Add messages. These messages will become the result of ``recv()``
+``_add_send_message_(\*message)``    Add messages. These messages will become the expected input string of ``send()``
+==================================== ================================================================================
+
+-------------------
+ Support Functions
+-------------------
+
+``dprint()``
+============
+
+It's pretty print function for debugging. When your specs become fail,
+this function helps you to find bugs.

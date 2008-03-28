@@ -1,0 +1,143 @@
+
+1. Copy html4css.py from python25/Lib/site-packages/docutils/writer/
+2. Rename html4css.py to rst2codeplex.py
+3. Create behavior_rst2codeplex.py
+4. Create an entry point for the pyspec.
+5. create first test.
+
+1.Copy
+======
+
+You want to create converter from reStructuredText into CodePlex wiki fromat.
+You should choose a base writter class. s4 and pep formatter depend on
+HTML formatter. You select the html formatter.
+
+read source code and make strategy. this file has 2 classes. one class is
+Writer class. another is HTMLTranslator. HTMLTranslator formats internal
+tree into HTML. So your main work is changing this class. You can use
+legacy code support in pyspec.
+
+2.Rename
+========
+
+4.Create an entry point for the pyspec.
+=======================================
+
+If you want to write spec code, you should create an entry point.
+In Python25/Scripts, there is rst2html.py. The function called publish_cmdline
+in docutils.core is used in this script. Then you find prefer function ``publish_string()``. It's good for the entry point.
+
+You wrote following code at the end of behavior_rst2codeplex.py::
+
+    from rst2codeplex import Writer
+
+    def entry_point(source):
+        from docutils.core import publish_string
+        return publish_string(source, writer_name="codeplex", writer=Writer())
+
+    if __name__ == "__main__":
+        source = """
+    ====
+    Test
+    ====
+
+    1. List Item1
+    2. List Item2
+    """
+        print entry_point(source)
+
+You try it on console::
+
+    $ python rst2codeplex.py
+    <?xml version="1.0" encoding="utf-8" ?>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+
+You can get good entry point!
+
+5.Create First Test
+===================
+
+At first, you changed class name of HTMLTranslator to CodePlexTranslator.
+You need to use test_proxy to the translator class. You implemented DI
+by parameter for test.
+
+    def __init__(self, translator=CodePlexTranslator):
+        writers.Writer.__init__(self)
+        self.translator_class = translator
+
+def TranslatorForSpec(document):
+    translator = CodePlexTranslator(document)
+    return test_proxy(translator)
+
+def entry_point(source):
+    from docutils.core import publish_string
+    return publish_string(source, writer_name="codeplex",
+                          writer=Writer(translator=TranslatorForSpec))
+
+6.Remove unused text block
+==========================
+
+$ wpython behavior_rst2codeplex.py
+
+Title string
+    can convert to wiki1 ... Failure
+
+======================================================================
+FAIL: can convert to wiki1
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "behavior_rst2codeplex.py", line 24, in can_convert_to_wiki1
+    About(self.result).should_include("! Test Title")
+AssertionError: self.result(="<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.or
+g/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/"
+/>
+<title>Test Title</title>
+</head>
+<body>
+<div class="document" id="test-title">
+<h1 class="title">Test Title</h1>
+</div>
+</body>
+</html>
+") should include "! Test Title", but didn't.
+
+
+
+----------------------------------------------------------------------
+Ran 1 spec in 0.267s
+FAILED(failures=1)
+
+changing => astext()
+at Writer.__init__
+clear => body_prefix, body_suffix
+remove head_prefix.extend, html_prolog.append
+
+$ wpython behavior_rst2codeplex.py
+
+Title string
+    can convert to wiki1 ... Failure
+
+======================================================================
+FAIL: can convert to wiki1
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "behavior_rst2codeplex.py", line 24, in can_convert_to_wiki1
+    About(self.result).should_include("! Test Title")
+AssertionError: self.result(="<div class="document" id="test-title">
+<h1 class="title">Test Title</h1>
+</div>
+") should include "! Test Title", but didn't.
+
+
+
+----------------------------------------------------------------------
+Ran 1 spec in 0.264s
+FAILED(failures=1)
+

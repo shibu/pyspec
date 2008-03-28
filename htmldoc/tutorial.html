@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>PySpec Tutorial</title>
+<meta name="author" content="Shibukawa Yoshiki" />
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="pyspec-tutorial">
+<h1 class="title">PySpec Tutorial</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Shibukawa Yoshiki</td></tr>
+</tbody>
+</table>
+<div class="section">
+<h1><a id="install" name="install">Install</a></h1>
+<div class="section">
+<h2><a id="requirements" name="requirements">Requirements</a></h2>
+<p>PySpec needs following files.</p>
+<ul class="simple">
+<li>Python 2.4 or 2.5
+&lt;<a class="reference" href="http://www.python.org/">http://www.python.org/</a>&gt;</li>
+<li>wxPython 2.6(if you want to use GUI runner)
+&lt;<a class="reference" href="http://www.wxpython.org/download.php#binaries">http://www.wxpython.org/download.php#binaries</a>&gt;</li>
+<li>graphviz(if you want to use GUI runner)
+&lt;<a class="reference" href="http://www.graphviz.org/">http://www.graphviz.org/</a>&gt;</li>
+</ul>
+</div>
+<div class="section">
+<h2><a id="how-to-install" name="how-to-install">How to install</a></h2>
+<blockquote>
+<cite>python setup.py install</cite></blockquote>
+</div>
+</div>
+<div class="section">
+<h1><a id="pyspec-tutorial-creating-stack" name="pyspec-tutorial-creating-stack">PySpec Tutorial(Creating Stack)</a></h1>
+<p>Let's start behavior driven development. We will be creating a stack class.</p>
+<div class="section">
+<h2><a id="step-1-imagine-the-spec-in-natural-language" name="step-1-imagine-the-spec-in-natural-language">Step.1 - Imagine the spec in natural language</a></h2>
+<p>At first, you should think the specification of stack class. You list up
+following specifications.</p>
+<ol class="arabic simple">
+<li>At first, the stack is empty.</li>
+<li>If you push the value to the stack, the stack is not empty.</li>
+<li>The push() method doesn't return value.</li>
+<li>The stack that have some values, you can get the last value by pop() method.</li>
+<li>If you call pop() method of the empty stack, EmptyException would be raised.</li>
+</ol>
+<p>Let's implement the specifications.</p>
+</div>
+<div class="section">
+<h2><a id="step-2-create-specification-in-python" name="step-2-create-specification-in-python">Step.2 - Create Specification in Python</a></h2>
+<p>You should implement the specification first like TDD.</p>
+<p>behavior_stack.py:</p>
+<pre class="literal-block">
+import stack         # import production code
+from pyspec import * # import pyspec framework
+
+class Behavior_Stack(object):
+  &#64;context(group=1)
+  def new_stack(self):
+    self.stack = stack.Stack()
+
+  &#64;spec(group=1)
+  def should_be_empty(self):
+    About(self.stack).should_be_empty()
+
+if __name__ == &quot;__main__&quot;:
+  run_test()
+</pre>
+<p>The specification becomes class. In the pyspec, specification is plain python
+class. In this case, the specification class has two methods. One method is
+a context method, and another is specification method. You should write
+preparation codes in context method. All verification methods should be in
+spec method.</p>
+<p>PySpec has many verification methods like following list:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">should_equal()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">should_equal_nearly()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">should_be_true()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">should_be_none()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">should_be_same()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">should_include()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">should_be_empty()</span></tt></li>
+</ul>
+<p>If you want to learn more, you should see pyspec reference manual.
+Then, you implement production code. you should type the interface code only
+enough to run test.</p>
+<p>stack.py:</p>
+<pre class="literal-block">
+class Stack(object):
+  def __len__(self):
+    pass
+</pre>
+<p>If you run the spec, result would fail:</p>
+<pre class="literal-block">
+$ python behavior_stack.py
+
+new stack
+    should be empty ... Error
+
+======================================================================
+ERROR: should be empty
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;behavior_stack.py&quot;, line 11, in should_be_empty
+    About(self.stack).should_be_empty()
+  File &quot;c:\Python25\Lib\site-packages\pyspec\__init__.py&quot;, line 502, in should_be_empty
+    if len(self.actual) != 0:
+TypeError: an integer is required
+
+Console:
+
+----------------------------------------------------------------------
+Ran 1 spec in 0.049s
+FAILED(errors=1)
+</pre>
+</div>
+<div class="section">
+<h2><a id="step-3-red-signal-to-green" name="step-3-red-signal-to-green">Step.3 Red signal to Green</a></h2>
+<p>Then you should change the production code.</p>
+<p>stack.py:</p>
+<pre class="literal-block">
+class Stack(object):
+  def __len__(self):
+    return 0
+</pre>
+<p>In this time, the result would be success:</p>
+<pre class="literal-block">
+$ python behavior_stack.py
+
+new stack
+    should be empty ... OK
+
+----------------------------------------------------------------------
+Ran 1 spec in 0.048s
+OK
+</pre>
+<p>The implementation is temporary code, but implementing this spec was finished.
+After implementing all specs, the production code will be completed.</p>
+</div>
+<div class="section">
+<h2><a id="step-4-store-one-value-1" name="step-4-store-one-value-1">Step.4 Store one value(1)</a></h2>
+<p>Next, you implement second spec.</p>
+<p>behavior_stack.py:</p>
+<pre class="literal-block">
+class Behavior_Stack(object):
+  &#64;context(group=2)
+  def stack_with_one_value(self):
+    self.stack = stack.Stack()
+    self.stack.push(10)
+
+  &#64;spec(group=2)
+  def should_not_be_empty(self):
+    About(self.stack).should_not_be_empty()
+</pre>
+<p>And you should implement the interface.</p>
+<p>stack.py:</p>
+<pre class="literal-block">
+class Stack(object):
+  def push(self, value):
+    pass
+</pre>
+<p>Then, If you run the spec, the spec will fail as you imagine:</p>
+<pre class="literal-block">
+$ python behavior_stack.py
+
+new stack
+    should be empty ... OK
+stack with one value
+    should not be empty ... Failure
+
+======================================================================
+FAIL: should not be empty
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;behavior_stack.py&quot;, line 20, in should_not_be_empty
+    About(self.stack).should_not_be_empty()
+AssertionError: self.stack should not be empty, but was empty.
+
+Console:
+
+----------------------------------------------------------------------
+Ran 2 specs in 0.062s
+FAILED(failures=1)
+</pre>
+</div>
+<div class="section">
+<h2><a id="step-5-store-one-value-2" name="step-5-store-one-value-2">Step.5 Store one value(2)</a></h2>
+<p>You check the spec test fail. Let's make the red signal to green.</p>
+<dl class="docutils">
+<dt>stack.py::</dt>
+<dd><dl class="first last docutils">
+<dt>class Stack(object):</dt>
+<dd><dl class="first last docutils">
+<dt>def __init__(self):</dt>
+<dd>self.values = []</dd>
+<dt>def __len__(self):</dt>
+<dd>return len(self.values)</dd>
+<dt>def push(self, value):</dt>
+<dd>self.values.append(value)</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The result become:</p>
+<pre class="literal-block">
+$ python behavior_stack.py
+
+new stack
+    should be empty ... OK
+stack with one value
+    should not be empty ... OK
+
+----------------------------------------------------------------------
+Ran 2 specs in 0.062s
+OK
+</pre>
+<p>Fail the spec test at first is important. If you mistake to implement the
+test, the spec doesn't fail. It declare the spec is right or not.</p>
+</div>
+<div class="section">
+<h2><a id="step-6-push-doesn-t-return-value" name="step-6-push-doesn-t-return-value">Step.6 push() doesn't return value</a></h2>
+<p>It's easy to create the spec.</p>
+<p>behavior_stack.py:</p>
+<pre class="literal-block">
+class Behavior_Stack(object):
+  &#64;spec(group=1)
+  def push_should_not_return_value(self):
+      About(self.stack.push(1)).should_be_none()
+</pre>
+<p>And then, try to run the spec:</p>
+<pre class="literal-block">
+$ python behavior_stack.py
+
+new stack
+    should be empty ... OK
+stack with one value
+    should not be empty ... OK
+new stack
+    push should not return value ... OK
+</pre>
+<p>New spec was passed to the test even if you have done nothing.
+But writing spec is important. If the product code would be changed,
+the spec can find errors.</p>
+</div>
+<div class="section">
+<h2><a id="step-7-you-can-get-the-last-value-by-pop-method" name="step-7-you-can-get-the-last-value-by-pop-method">Step.7 You can get the last value by pop() method</a></h2>
+<p>behavior_stack.py:</p>
+<pre class="literal-block">
+class Behavior_Stack(object):
+  &#64;context(group=3)
+  def stack_with_some_values(self):
+    self.stack = stack.Stack()
+    self.stack.push(10)
+    self.last_value = 20
+    self.stack.push(self.last_value)
+
+  &#64;spec(group=3)
+  def should_return_last_value_by_pop_method(self):
+    About(self.stack.pop()).should_equal(self.last_value)
+</pre>
+<p>Of course, you can write following code:</p>
+<pre class="literal-block">
+&#64;spec(group=3)
+def should_return_last_value_by_pop_method(self):
+  About(self.stack.pop()).should_equal(20)
+</pre>
+<p>These specs have same affect to the interpreter. But first spec has
+more information to understand the intention of the spec(last_value is 20).</p>
+<p>After running the spec and watch the red signal, you will write the following
+code.</p>
+<p>stack.py:</p>
+<pre class="literal-block">
+class Stack(object):
+  def pop(self):
+    value = self.values[-1]
+    del self.values[-1]
+    return value
+</pre>
+<p>result:</p>
+<pre class="literal-block">
+$ python behavior_stack.py
+
+new stack
+    should be empty ... OK
+stack with one value
+    should not be empty ... OK
+new stack
+    push should not return value ... OK
+stack with some values
+    should return last value by pop method ... OK
+
+----------------------------------------------------------------------
+Ran 4 specs in 0.031s
+OK
+</pre>
+</div>
+<div class="section">
+<h2><a id="step-8-emptyexception-would-be-raised" name="step-8-emptyexception-would-be-raised">Step.8 EmptyException would be raised</a></h2>
+<p>This is the last step. You will create the spec for exception.
+At first, You should create the exception class.</p>
+<p>stack.py:</p>
+<pre class="literal-block">
+class EmptyException(RuntimeError):
+    pass
+</pre>
+<p>And then, you create spec.</p>
+<p>behavior_stack.py:</p>
+<pre class="literal-block">
+class Behavior_Stack(object):
+  &#64;context(group=4)
+  def empty_stack(self):
+      self.empty_stack = stack.Stack()
+
+  &#64;spec(group=4, expect=stack.EmptyException)
+  def should_raise_EmptyException_if_pop_called(self):
+    self.empty_stack.pop()
+</pre>
+<p>&#64;spec can accept <tt class="docutils literal"><span class="pre">expect</span></tt> parameter. If you set this parameter,
+that spec method describes the specification of exceptions. In this
+case, exception whose class is stack.EmptyException will be raised
+if the product code would have been implemented collectly.</p>
+<p>You implement the product code after watching that the spec failed.</p>
+<p>stack.py:</p>
+<pre class="literal-block">
+class Stack(object):
+    def pop(self):
+        if self.values:
+            value = self.values[-1]
+            del self.values[-1]
+            return value
+        raise EmptyException()
+</pre>
+<p>In this step, there is another topic. You already have created
+the context that have new stack(group=1). But, you wrote another
+context method. It makes the spec description clearer. &quot;empty stack&quot;
+is more suitable than &quot;new stack&quot;.</p>
+</div>
+<div class="section">
+<h2><a id="step-9-refactoring" name="step-9-refactoring">Step.9 Refactoring</a></h2>
+<p>You have finished all specifications. Finally, you refactor the
+specs. It is important for the specification as a document.</p>
+<p>Spec name is important for concept of BDD.
+At first, check the output messages. Is there bad spec name as
+natural language? If you find bad spec names, you should fix them.</p>
+<p>If the spec class is too large, you need to split. <tt class="docutils literal"><span class="pre">group</span></tt> parameter
+helps you. All &#64;context and &#64;spec decorator in this tutorial has
+group parameter. But if all decorator's group parameter are same,
+you can skip them.</p>
+<p>behavior_stack.py:</p>
+<pre class="literal-block">
+class Behavior_Stack_New(object):
+    &#64;context
+    def new_stack(self):
+        self.stack = stack.Stack()
+
+    &#64;spec
+    def should_be_empty(self):
+        About(self.stack).should_be_empty()
+
+    &#64;spec
+    def push_method_should_not_return_value(self):
+        About(self.stack.push(1)).should_be_none()
+
+
+class Behavior_Stack_WithValue(object):
+    &#64;context
+    def stack_with_one_value(self):
+        self.stack = stack.Stack()
+        self.stack.push(10)
+
+    &#64;spec
+    def should_not_be_empty(self):
+        About(self.stack).should_not_be_empty()
+</pre>
+<p>That is all this document tells you. Thank you for reading my poor English.
+Have fun!</p>
+</div>
+</div>
+</div>
+</body>
+</html>

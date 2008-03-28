@@ -1,0 +1,629 @@
+
+Title source
+    can convert to wiki1 ... OK
+method call should not changed for title ... Ignored
+Subtitle source
+    can convert to wiki2 ... OK
+method call should not changed for subtitle ... Ignored
+Subsubtitle source
+    can convert to wiki3 ... OK
+method call should not changed for subsubtitle ... Ignored
+Subsubsubtitle source
+    can convert to wiki4 ... OK
+method call should not changed for subsubsubtitle ... Ignored
+Bulleted list source
+    can convert to wiki5 ... OK
+method call should not changed for bulleted list ... Ignored
+Numbered list source
+    can convert to wiki6 ... OK
+method call should not changed for numbered list ... Ignored
+Text formatter source
+    can convert to wiki7 ... OK
+method call should not changed for text formatter ... Ignored
+Paragraph source
+    can convert to wiki8 ... OK
+method call should not changed for paragraph ... Ignored
+Literal blcok source
+    can convert to wiki9 ... OK
+method call should not changed for literal block ... Ignored
+Table source
+    can convert to wiki10 ... OK
+method call should not changed for table ... Ignored
+Docinfo source
+    can convert to wiki11 ... OK
+method call should not changed for docinfo ... Ignored
+Contents source
+    can convert to wiki12 ... OK
+method call should not changed for contents ... Ignored
+Field list source
+    can convert to wiki13 ... OK
+method call should not changed for field list ... Ignored
+Escape character in html source
+    doews not convert to wiki14 ... OK
+method call should not changed for escaping string ... Ignored
+Title source
+    can convert to wiki1 ... OK
+Method calls in createing title
+    should not changed for title ... Error
+
+======================================================================
+ERROR: should not changed for title
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "behavior_rst2codeplex.py", line 376, in should_not_changed_for_title
+    writer=self.writer())
+AttributeError: Writer instance has no __call__ method
+
+Console:
+
+======================================================================
+Ignored Tests: method call should not changed for title
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_title()
+recording: dispatch_visit(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title></document>)
+recording: dispatch_visit(<title>Test Title</title>)
+recording: dispatch_visit(Test Title)
+recording: dispatch_departure(Test Title)
+recording: dispatch_departure(<title>Test Title</title>)
+recording: dispatch_departure(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title></document>)
+recording: astext()
+! Test Title
+
+
+
+======================================================================
+Ignored Tests: method call should not changed for subtitle
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_subtitle()
+recording: dispatch_visit(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><subtitle ids="subtitle" names="subtitle">SubTitle</subtitle></document>)
+recording: dispatch_visit(<title>Test Title</title>)
+recording: dispatch_visit(Test Title)
+recording: dispatch_departure(Test Title)
+recording: dispatch_departure(<title>Test Title</title>)
+recording: dispatch_visit(<subtitle ids="subtitle" names="subtitle">SubTitle</subtitle>)
+recording: dispatch_visit(SubTitle)
+recording: dispatch_departure(SubTitle)
+recording: dispatch_departure(<subtitle ids="subtitle" names="subtitle">SubTitle</subtitle>)
+recording: dispatch_departure(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><subtitle ids="subtitle" names="subtitle">SubTitle</subtitle></document>)
+recording: astext()
+! Test Title
+
+{anchor:test-title}
+!! SubTitle
+
+
+======================================================================
+Ignored Tests: method call should not changed for subsubtitle
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_subsubtitle()
+recording: dispatch_visit(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><subtitle ids="subtitle" names="subtitle">SubTitle</subtitle><section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title></section></document>)
+recording: dispatch_visit(<title>Test Title</title>)
+recording: dispatch_visit(Test Title)
+recording: dispatch_departure(Test Title)
+recording: dispatch_departure(<title>Test Title</title>)
+recording: dispatch_visit(<subtitle ids="subtitle" names="subtitle">SubTitle</subtitle>)
+recording: dispatch_visit(SubTitle)
+recording: dispatch_departure(SubTitle)
+recording: dispatch_departure(<subtitle ids="subtitle" names="subtitle">SubTitle</subtitle>)
+recording: dispatch_visit(<section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title></section>)
+recording: dispatch_visit(<title>SubSubTitle</title>)
+recording: dispatch_visit(SubSubTitle)
+recording: dispatch_departure(SubSubTitle)
+recording: dispatch_departure(<title>SubSubTitle</title>)
+recording: dispatch_departure(<section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title></section>)
+recording: dispatch_departure(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><subtitle ids="subtitle" names="subtitle">SubTitle</subtitle><section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title></section></document>)
+recording: astext()
+! Test Title
+
+{anchor:test-title}
+!! SubTitle
+
+{anchor:subsubtitle}
+!!! SubSubTitle
+
+
+
+
+======================================================================
+Ignored Tests: method call should not changed for subsubsubtitle
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_subsubsubtitle()
+recording: dispatch_visit(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><subtitle ids="subtitle" names="subtitle">SubTitle</subtitle><section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title>SubSubSubTitle</title></section></section></document>)
+recording: dispatch_visit(<title>Test Title</title>)
+recording: dispatch_visit(Test Title)
+recording: dispatch_departure(Test Title)
+recording: dispatch_departure(<title>Test Title</title>)
+recording: dispatch_visit(<subtitle ids="subtitle" names="subtitle">SubTitle</subtitle>)
+recording: dispatch_visit(SubTitle)
+recording: dispatch_departure(SubTitle)
+recording: dispatch_departure(<subtitle ids="subtitle" names="subtitle">SubTitle</subtitle>)
+recording: dispatch_visit(<section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title>SubSubSubTitle</title></section></section>)
+recording: dispatch_visit(<title>SubSubTitle</title>)
+recording: dispatch_visit(SubSubTitle)
+recording: dispatch_departure(SubSubTitle)
+recording: dispatch_departure(<title>SubSubTitle</title>)
+recording: dispatch_visit(<section ids="subsubsubtitle" names="subsubsubtitle"><title>SubSubSubTitle</title></section>)
+recording: dispatch_visit(<title>SubSubSubTitle</title>)
+recording: dispatch_visit(SubSubSubTitle)
+recording: dispatch_departure(SubSubSubTitle)
+recording: dispatch_departure(<title>SubSubSubTitle</title>)
+recording: dispatch_departure(<section ids="subsubsubtitle" names="subsubsubtitle"><title>SubSubSubTitle</title></section>)
+recording: dispatch_departure(<section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title>SubSubSubTitle</title></section></section>)
+recording: dispatch_departure(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><subtitle ids="subtitle" names="subtitle">SubTitle</subtitle><section ids="subsubtitle" names="subsubtitle"><title>SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title>SubSubSubTitle</title></section></section></document>)
+recording: astext()
+! Test Title
+
+{anchor:test-title}
+!! SubTitle
+
+{anchor:subsubtitle}
+!!! SubSubTitle
+
+
+{anchor:subsubsubtitle}
+!!!! SubSubSubTitle
+
+
+
+
+
+======================================================================
+Ignored Tests: method call should not changed for bulleted list
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_bulleted_list()
+recording: dispatch_visit(<document ids="test-bulleted-list" names="test\ bulleted\ list" source="<string>" title="Test Bulleted List"><title>Test Bulleted List</title><bullet_list bullet="*"><list_item><definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list></list_item></bullet_list></document>)
+recording: dispatch_visit(<title>Test Bulleted List</title>)
+recording: dispatch_visit(Test Bulleted List)
+recording: dispatch_departure(Test Bulleted List)
+recording: dispatch_departure(<title>Test Bulleted List</title>)
+recording: dispatch_visit(<bullet_list bullet="*"><list_item><definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list></list_item></bullet_list>)
+recording: dispatch_visit(<list_item><definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list></list_item>)
+recording: dispatch_visit(<definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list>)
+recording: dispatch_visit(<definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item>)
+recording: dispatch_visit(<term>List Level 1</term>)
+recording: dispatch_visit(List Level 1)
+recording: dispatch_departure(List Level 1)
+recording: dispatch_departure(<term>List Level 1</term>)
+recording: dispatch_visit(<definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition>)
+recording: dispatch_visit(<bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list>)
+recording: dispatch_visit(<list_item><paragraph>List Level 2</paragraph></list_item>)
+recording: dispatch_visit(<paragraph>List Level 2</paragraph>)
+recording: dispatch_visit(List Level 2)
+recording: dispatch_departure(List Level 2)
+recording: dispatch_departure(<paragraph>List Level 2</paragraph>)
+recording: dispatch_departure(<list_item><paragraph>List Level 2</paragraph></list_item>)
+recording: dispatch_departure(<bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list>)
+recording: dispatch_departure(<definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition>)
+recording: dispatch_departure(<definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item>)
+recording: dispatch_departure(<definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list>)
+recording: dispatch_departure(<list_item><definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list></list_item>)
+recording: dispatch_departure(<bullet_list bullet="*"><list_item><definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list></list_item></bullet_list>)
+recording: dispatch_departure(<document ids="test-bulleted-list" names="test\ bulleted\ list" source="<string>" title="Test Bulleted List"><title>Test Bulleted List</title><bullet_list bullet="*"><list_item><definition_list><definition_list_item><term>List Level 1</term><definition><bullet_list bullet="*" classes="first last"><list_item><paragraph>List Level 2</paragraph></list_item></bullet_list></definition></definition_list_item></definition_list></list_item></bullet_list></document>)
+recording: astext()
+! Test Bulleted List
+
+* List Level 1** List Level 2
+
+</dd>
+
+
+
+======================================================================
+Ignored Tests: method call should not changed for numbered list
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_numbered_list()
+recording: dispatch_visit(<document ids="test-numbered-list" names="test\ numbered\ list" source="<string>" title="Test Numbered List"><title>Test Numbered List</title><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 1</paragraph><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list></list_item></enumerated_list></document>)
+recording: dispatch_visit(<title>Test Numbered List</title>)
+recording: dispatch_visit(Test Numbered List)
+recording: dispatch_departure(Test Numbered List)
+recording: dispatch_departure(<title>Test Numbered List</title>)
+recording: dispatch_visit(<enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 1</paragraph><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list></list_item></enumerated_list>)
+recording: dispatch_visit(<list_item><paragraph>List Level 1</paragraph><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list></list_item>)
+recording: dispatch_visit(<paragraph>List Level 1</paragraph>)
+recording: dispatch_visit(List Level 1)
+recording: dispatch_departure(List Level 1)
+recording: dispatch_departure(<paragraph>List Level 1</paragraph>)
+recording: dispatch_visit(<enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list>)
+recording: dispatch_visit(<list_item><paragraph>List Level 2</paragraph></list_item>)
+recording: dispatch_visit(<paragraph>List Level 2</paragraph>)
+recording: dispatch_visit(List Level 2)
+recording: dispatch_departure(List Level 2)
+recording: dispatch_departure(<paragraph>List Level 2</paragraph>)
+recording: dispatch_departure(<list_item><paragraph>List Level 2</paragraph></list_item>)
+recording: dispatch_departure(<enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list>)
+recording: dispatch_departure(<list_item><paragraph>List Level 1</paragraph><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list></list_item>)
+recording: dispatch_departure(<enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 1</paragraph><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list></list_item></enumerated_list>)
+recording: dispatch_departure(<document ids="test-numbered-list" names="test\ numbered\ list" source="<string>" title="Test Numbered List"><title>Test Numbered List</title><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 1</paragraph><enumerated_list enumtype="arabic" prefix="" suffix="."><list_item><paragraph>List Level 2</paragraph></list_item></enumerated_list></list_item></enumerated_list></document>)
+recording: astext()
+! Test Numbered List
+
+# List Level 1
+## List Level 2
+
+
+======================================================================
+Ignored Tests: method call should not changed for text formatter
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_text_formatter()
+recording: dispatch_visit(<document ids="test-text-fromatter" names="test\ text\ fromatter" source="<string>" title="Test Text Fromatter"><title>Test Text Fromatter</title><paragraph><strong>bold</strong></paragraph><paragraph><emphasis>italics</emphasis></paragraph><paragraph><literal>inline literal</literal></paragraph></document>)
+recording: dispatch_visit(<title>Test Text Fromatter</title>)
+recording: dispatch_visit(Test Text Fromatter)
+recording: dispatch_departure(Test Text Fromatter)
+recording: dispatch_departure(<title>Test Text Fromatter</title>)
+recording: dispatch_visit(<paragraph><strong>bold</strong></paragraph>)
+recording: dispatch_visit(<strong>bold</strong>)
+recording: dispatch_visit(bold)
+recording: dispatch_departure(bold)
+recording: dispatch_departure(<strong>bold</strong>)
+recording: dispatch_departure(<paragraph><strong>bold</strong></paragraph>)
+recording: dispatch_visit(<paragraph><emphasis>italics</emphasis></paragraph>)
+recording: dispatch_visit(<emphasis>italics</emphasis>)
+recording: dispatch_visit(italics)
+recording: dispatch_departure(italics)
+recording: dispatch_departure(<emphasis>italics</emphasis>)
+recording: dispatch_departure(<paragraph><emphasis>italics</emphasis></paragraph>)
+recording: dispatch_visit(<paragraph><literal>inline literal</literal></paragraph>)
+recording: dispatch_departure(<paragraph><literal>inline literal</literal></paragraph>)
+recording: dispatch_departure(<document ids="test-text-fromatter" names="test\ text\ fromatter" source="<string>" title="Test Text Fromatter"><title>Test Text Fromatter</title><paragraph><strong>bold</strong></paragraph><paragraph><emphasis>italics</emphasis></paragraph><paragraph><literal>inline literal</literal></paragraph></document>)
+recording: astext()
+! Test Text Fromatter
+
+
+ *bold*
+
+ _italics_
+
+ {{inline literal}}
+
+
+======================================================================
+Ignored Tests: method call should not changed for paragraph
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_paragraph()
+recording: dispatch_visit(<document ids="test-paragraph" names="test\ paragraph" source="<string>" title="Test Paragraph"><title>Test Paragraph</title><paragraph>paragraph1</paragraph><paragraph>paragraph2</paragraph></document>)
+recording: dispatch_visit(<title>Test Paragraph</title>)
+recording: dispatch_visit(Test Paragraph)
+recording: dispatch_departure(Test Paragraph)
+recording: dispatch_departure(<title>Test Paragraph</title>)
+recording: dispatch_visit(<paragraph>paragraph1</paragraph>)
+recording: dispatch_visit(paragraph1)
+recording: dispatch_departure(paragraph1)
+recording: dispatch_departure(<paragraph>paragraph1</paragraph>)
+recording: dispatch_visit(<paragraph>paragraph2</paragraph>)
+recording: dispatch_visit(paragraph2)
+recording: dispatch_departure(paragraph2)
+recording: dispatch_departure(<paragraph>paragraph2</paragraph>)
+recording: dispatch_departure(<document ids="test-paragraph" names="test\ paragraph" source="<string>" title="Test Paragraph"><title>Test Paragraph</title><paragraph>paragraph1</paragraph><paragraph>paragraph2</paragraph></document>)
+recording: astext()
+! Test Paragraph
+
+
+paragraph1
+
+paragraph2
+
+
+======================================================================
+Ignored Tests: method call should not changed for literal block
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_literal_block()
+recording: dispatch_visit(<document ids="test-literal-block" names="test\ literal\ block" source="<string>" title="Test Literal Block"><title>Test Literal Block</title><paragraph>sample:</paragraph><literal_block xml:space="preserve">class SamplePythonClass(object):
+    def __init__(self):
+        pass</literal_block></document>)
+recording: dispatch_visit(<title>Test Literal Block</title>)
+recording: dispatch_visit(Test Literal Block)
+recording: dispatch_departure(Test Literal Block)
+recording: dispatch_departure(<title>Test Literal Block</title>)
+recording: dispatch_visit(<paragraph>sample:</paragraph>)
+recording: dispatch_visit(sample:)
+recording: dispatch_departure(sample:)
+recording: dispatch_departure(<paragraph>sample:</paragraph>)
+recording: dispatch_visit(<literal_block xml:space="preserve">class SamplePythonClass(object):
+    def __init__(self):
+        pass</literal_block>)
+recording: dispatch_visit(class SamplePythonClass(object):
+    def __init__(self):
+        pass)
+recording: dispatch_departure(class SamplePythonClass(object):
+    def __init__(self):
+        pass)
+recording: dispatch_departure(<literal_block xml:space="preserve">class SamplePythonClass(object):
+    def __init__(self):
+        pass</literal_block>)
+recording: dispatch_departure(<document ids="test-literal-block" names="test\ literal\ block" source="<string>" title="Test Literal Block"><title>Test Literal Block</title><paragraph>sample:</paragraph><literal_block xml:space="preserve">class SamplePythonClass(object):
+    def __init__(self):
+        pass</literal_block></document>)
+recording: astext()
+! Test Literal Block
+
+
+sample:
+
+{{
+class SamplePythonClass(object):
+    def __init__(self):
+        pass
+}}
+
+
+======================================================================
+Ignored Tests: method call should not changed for table
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_table()
+recording: dispatch_visit(<document ids="test-table" names="test\ table" source="<string>" title="Test Table"><title>Test Table</title><table><tgroup cols="2"><colspec colwidth="9"/><colspec colwidth="37"/><thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead><tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody></tgroup></table></document>)
+recording: dispatch_visit(<title>Test Table</title>)
+recording: dispatch_visit(Test Table)
+recording: dispatch_departure(Test Table)
+recording: dispatch_departure(<title>Test Table</title>)
+recording: dispatch_visit(<table><tgroup cols="2"><colspec colwidth="9"/><colspec colwidth="37"/><thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead><tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody></tgroup></table>)
+recording: dispatch_visit(<tgroup cols="2"><colspec colwidth="9"/><colspec colwidth="37"/><thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead><tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody></tgroup>)
+recording: dispatch_visit(<colspec colwidth="9"/>)
+recording: dispatch_departure(<colspec colwidth="9"/>)
+recording: dispatch_visit(<colspec colwidth="37"/>)
+recording: dispatch_departure(<colspec colwidth="37"/>)
+recording: dispatch_visit(<thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead>)
+recording: dispatch_visit(<row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row>)
+recording: dispatch_visit(<entry><paragraph>Parameter</paragraph></entry>)
+recording: dispatch_visit(<paragraph>Parameter</paragraph>)
+recording: dispatch_visit(Parameter)
+recording: dispatch_departure(Parameter)
+recording: dispatch_departure(<paragraph>Parameter</paragraph>)
+recording: dispatch_departure(<entry><paragraph>Parameter</paragraph></entry>)
+recording: dispatch_visit(<entry><paragraph>Description</paragraph></entry>)
+recording: dispatch_visit(<paragraph>Description</paragraph>)
+recording: dispatch_visit(Description)
+recording: dispatch_departure(Description)
+recording: dispatch_departure(<paragraph>Description</paragraph>)
+recording: dispatch_departure(<entry><paragraph>Description</paragraph></entry>)
+recording: dispatch_departure(<row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row>)
+recording: dispatch_departure(<thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead>)
+recording: dispatch_visit(<tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody>)
+recording: dispatch_visit(<row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row>)
+recording: dispatch_visit(<entry><paragraph>key</paragraph></entry>)
+recording: dispatch_visit(<paragraph>key</paragraph>)
+recording: dispatch_visit(key)
+recording: dispatch_departure(key)
+recording: dispatch_departure(<paragraph>key</paragraph>)
+recording: dispatch_departure(<entry><paragraph>key</paragraph></entry>)
+recording: dispatch_visit(<entry><paragraph>Set the spec method's parameter name.</paragraph></entry>)
+recording: dispatch_visit(<paragraph>Set the spec method's parameter name.</paragraph>)
+recording: dispatch_visit(Set the spec method's parameter name.)
+recording: dispatch_departure(Set the spec method's parameter name.)
+recording: dispatch_departure(<paragraph>Set the spec method's parameter name.</paragraph>)
+recording: dispatch_departure(<entry><paragraph>Set the spec method's parameter name.</paragraph></entry>)
+recording: dispatch_departure(<row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row>)
+recording: dispatch_visit(<row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row>)
+recording: dispatch_visit(<entry><paragraph>group</paragraph></entry>)
+recording: dispatch_visit(<paragraph>group</paragraph>)
+recording: dispatch_visit(group)
+recording: dispatch_departure(group)
+recording: dispatch_departure(<paragraph>group</paragraph>)
+recording: dispatch_departure(<entry><paragraph>group</paragraph></entry>)
+recording: dispatch_visit(<entry><paragraph>Set the data provider method's group.</paragraph></entry>)
+recording: dispatch_visit(<paragraph>Set the data provider method's group.</paragraph>)
+recording: dispatch_visit(Set the data provider method's group.)
+recording: dispatch_departure(Set the data provider method's group.)
+recording: dispatch_departure(<paragraph>Set the data provider method's group.</paragraph>)
+recording: dispatch_departure(<entry><paragraph>Set the data provider method's group.</paragraph></entry>)
+recording: dispatch_departure(<row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row>)
+recording: dispatch_departure(<tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody>)
+recording: dispatch_departure(<tgroup cols="2"><colspec colwidth="9"/><colspec colwidth="37"/><thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead><tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody></tgroup>)
+recording: dispatch_departure(<table><tgroup cols="2"><colspec colwidth="9"/><colspec colwidth="37"/><thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead><tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody></tgroup></table>)
+recording: dispatch_departure(<document ids="test-table" names="test\ table" source="<string>" title="Test Table"><title>Test Table</title><table><tgroup cols="2"><colspec colwidth="9"/><colspec colwidth="37"/><thead><row><entry><paragraph>Parameter</paragraph></entry><entry><paragraph>Description</paragraph></entry></row></thead><tbody><row><entry><paragraph>key</paragraph></entry><entry><paragraph>Set the spec method's parameter name.</paragraph></entry></row><row><entry><paragraph>group</paragraph></entry><entry><paragraph>Set the data provider method's group.</paragraph></entry></row></tbody></tgroup></table></document>)
+recording: astext()
+! Test Table
+
+| *Parameter* |*Description* |
+| key |Set the spec method's parameter name. |
+| group |Set the data provider method's group. |
+
+
+======================================================================
+Ignored Tests: method call should not changed for docinfo
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_docinfo()
+recording: dispatch_visit(<document ids="test-table" names="test\ table" source="<string>" title="Test Table"><title>Test Table</title><docinfo><author>Shibukawa Yoshiki</author><contact>yoshiki at shibu.jp</contact><copyright>This document has been placed in the public domain.</copyright></docinfo></document>)
+recording: dispatch_visit(<title>Test Table</title>)
+recording: dispatch_visit(Test Table)
+recording: dispatch_departure(Test Table)
+recording: dispatch_departure(<title>Test Table</title>)
+recording: dispatch_visit(<docinfo><author>Shibukawa Yoshiki</author><contact>yoshiki at shibu.jp</contact><copyright>This document has been placed in the public domain.</copyright></docinfo>)
+recording: dispatch_visit(<author>Shibukawa Yoshiki</author>)
+recording: dispatch_visit(Shibukawa Yoshiki)
+recording: dispatch_departure(Shibukawa Yoshiki)
+recording: dispatch_departure(<author>Shibukawa Yoshiki</author>)
+recording: dispatch_visit(<contact>yoshiki at shibu.jp</contact>)
+recording: dispatch_visit(yoshiki at shibu.jp)
+recording: dispatch_departure(yoshiki at shibu.jp)
+recording: dispatch_departure(<contact>yoshiki at shibu.jp</contact>)
+recording: dispatch_visit(<copyright>This document has been placed in the public domain.</copyright>)
+recording: dispatch_visit(This document has been placed in the public domain.)
+recording: dispatch_departure(This document has been placed in the public domain.)
+recording: dispatch_departure(<copyright>This document has been placed in the public domain.</copyright>)
+recording: dispatch_departure(<docinfo><author>Shibukawa Yoshiki</author><contact>yoshiki at shibu.jp</contact><copyright>This document has been placed in the public domain.</copyright></docinfo>)
+recording: dispatch_departure(<document ids="test-table" names="test\ table" source="<string>" title="Test Table"><title>Test Table</title><docinfo><author>Shibukawa Yoshiki</author><contact>yoshiki at shibu.jp</contact><copyright>This document has been placed in the public domain.</copyright></docinfo></document>)
+recording: astext()
+! Test Table
+
+| *Author* | Shibukawa Yoshiki |
+| *Contact* | yoshiki at shibu.jp |
+| *Copyright* | This document has been placed in the public domain. |
+
+
+======================================================================
+Ignored Tests: method call should not changed for contents
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_contents()
+recording: dispatch_visit(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><topic classes="contents" ids="contents" names="contents"><title>Contents</title><bullet_list><list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item></bullet_list></topic><section ids="subtitle" names="subtitle"><title refid="id1">SubTitle</title><section ids="subsubtitle" names="subsubtitle"><title refid="id2">SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section></section></section></document>)
+recording: dispatch_visit(<title>Test Title</title>)
+recording: dispatch_visit(Test Title)
+recording: dispatch_departure(Test Title)
+recording: dispatch_departure(<title>Test Title</title>)
+recording: dispatch_visit(<topic classes="contents" ids="contents" names="contents"><title>Contents</title><bullet_list><list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item></bullet_list></topic>)
+recording: dispatch_visit(<title>Contents</title>)
+recording: dispatch_visit(Contents)
+recording: dispatch_departure(Contents)
+recording: dispatch_departure(<title>Contents</title>)
+recording: dispatch_visit(<bullet_list><list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item></bullet_list>)
+recording: dispatch_visit(<list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item>)
+recording: dispatch_visit(<paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph>)
+recording: dispatch_visit(<reference ids="id1" refid="subtitle">SubTitle</reference>)
+recording: dispatch_visit(SubTitle)
+recording: dispatch_departure(SubTitle)
+recording: dispatch_departure(<reference ids="id1" refid="subtitle">SubTitle</reference>)
+recording: dispatch_departure(<paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph>)
+recording: dispatch_visit(<bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list>)
+recording: dispatch_visit(<list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item>)
+recording: dispatch_visit(<paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph>)
+recording: dispatch_visit(<reference ids="id2" refid="subsubtitle">SubSubTitle</reference>)
+recording: dispatch_visit(SubSubTitle)
+recording: dispatch_departure(SubSubTitle)
+recording: dispatch_departure(<reference ids="id2" refid="subsubtitle">SubSubTitle</reference>)
+recording: dispatch_departure(<paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph>)
+recording: dispatch_visit(<bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list>)
+recording: dispatch_visit(<list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item>)
+recording: dispatch_visit(<paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph>)
+recording: dispatch_visit(<reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference>)
+recording: dispatch_visit(SubSubSubTitle)
+recording: dispatch_departure(SubSubSubTitle)
+recording: dispatch_departure(<reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference>)
+recording: dispatch_departure(<paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph>)
+recording: dispatch_departure(<list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item>)
+recording: dispatch_departure(<bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list>)
+recording: dispatch_departure(<list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item>)
+recording: dispatch_departure(<bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list>)
+recording: dispatch_departure(<list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item>)
+recording: dispatch_departure(<bullet_list><list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item></bullet_list>)
+recording: dispatch_departure(<topic classes="contents" ids="contents" names="contents"><title>Contents</title><bullet_list><list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item></bullet_list></topic>)
+recording: dispatch_visit(<section ids="subtitle" names="subtitle"><title refid="id1">SubTitle</title><section ids="subsubtitle" names="subsubtitle"><title refid="id2">SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section></section></section>)
+recording: dispatch_visit(<title refid="id1">SubTitle</title>)
+recording: dispatch_visit(SubTitle)
+recording: dispatch_departure(SubTitle)
+recording: dispatch_departure(<title refid="id1">SubTitle</title>)
+recording: dispatch_visit(<section ids="subsubtitle" names="subsubtitle"><title refid="id2">SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section></section>)
+recording: dispatch_visit(<title refid="id2">SubSubTitle</title>)
+recording: dispatch_visit(SubSubTitle)
+recording: dispatch_departure(SubSubTitle)
+recording: dispatch_departure(<title refid="id2">SubSubTitle</title>)
+recording: dispatch_visit(<section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section>)
+recording: dispatch_visit(<title refid="id3">SubSubSubTitle</title>)
+recording: dispatch_visit(SubSubSubTitle)
+recording: dispatch_departure(SubSubSubTitle)
+recording: dispatch_departure(<title refid="id3">SubSubSubTitle</title>)
+recording: dispatch_departure(<section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section>)
+recording: dispatch_departure(<section ids="subsubtitle" names="subsubtitle"><title refid="id2">SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section></section>)
+recording: dispatch_departure(<section ids="subtitle" names="subtitle"><title refid="id1">SubTitle</title><section ids="subsubtitle" names="subsubtitle"><title refid="id2">SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section></section></section>)
+recording: dispatch_departure(<document ids="test-title" names="test\ title" source="<string>" title="Test Title"><title>Test Title</title><topic classes="contents" ids="contents" names="contents"><title>Contents</title><bullet_list><list_item><paragraph><reference ids="id1" refid="subtitle">SubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id2" refid="subsubtitle">SubSubTitle</reference></paragraph><bullet_list><list_item><paragraph><reference ids="id3" refid="subsubsubtitle">SubSubSubTitle</reference></paragraph></list_item></bullet_list></list_item></bullet_list></list_item></bullet_list></topic><section ids="subtitle" names="subtitle"><title refid="id1">SubTitle</title><section ids="subsubtitle" names="subsubtitle"><title refid="id2">SubSubTitle</title><section ids="subsubsubtitle" names="subsubsubtitle"><title refid="id3">SubSubSubTitle</title></section></section></section></document>)
+recording: astext()
+! Test Title
+
+!! Contents
+{anchor:contents}
+* [SubTitle|#subtitle]
+** [SubSubTitle|#subsubtitle]
+*** [SubSubSubTitle|#subsubsubtitle]
+
+
+
+
+{anchor:subtitle}
+!!! SubTitle
+
+
+{anchor:subsubtitle}
+!!!! SubSubTitle
+
+
+{anchor:subsubsubtitle}
+!!!!! SubSubSubTitle
+
+
+
+
+
+
+======================================================================
+Ignored Tests: method call should not changed for field list
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_field_list()
+recording: dispatch_visit(<document ids="test-field-list" names="test\ field\ list" source="<string>" title="Test Field List"><title>Test Field List</title><docinfo><field><field_name>note</field_name><field_body><paragraph>This is note.</paragraph></field_body></field></docinfo></document>)
+recording: dispatch_visit(<title>Test Field List</title>)
+recording: dispatch_visit(Test Field List)
+recording: dispatch_departure(Test Field List)
+recording: dispatch_departure(<title>Test Field List</title>)
+recording: dispatch_visit(<docinfo><field><field_name>note</field_name><field_body><paragraph>This is note.</paragraph></field_body></field></docinfo>)
+recording: dispatch_visit(<field><field_name>note</field_name><field_body><paragraph>This is note.</paragraph></field_body></field>)
+recording: dispatch_visit(<field_name>note</field_name>)
+recording: dispatch_visit(note)
+recording: dispatch_departure(note)
+recording: dispatch_departure(<field_name>note</field_name>)
+recording: dispatch_visit(<field_body><paragraph classes="first last">This is note.</paragraph></field_body>)
+recording: dispatch_visit(<paragraph classes="first last">This is note.</paragraph>)
+recording: dispatch_visit(This is note.)
+recording: dispatch_departure(This is note.)
+recording: dispatch_departure(<paragraph classes="first last">This is note.</paragraph>)
+recording: dispatch_departure(<field_body><paragraph classes="first last">This is note.</paragraph></field_body>)
+recording: dispatch_departure(<field><field_name>note</field_name><field_body><paragraph classes="first last">This is note.</paragraph></field_body></field>)
+recording: dispatch_departure(<docinfo><field><field_name>note</field_name><field_body><paragraph classes="first last">This is note.</paragraph></field_body></field></docinfo>)
+recording: dispatch_departure(<document ids="test-field-list" names="test\ field\ list" source="<string>" title="Test Field List"><title>Test Field List</title><docinfo><field><field_name>note</field_name><field_body><paragraph classes="first last">This is note.</paragraph></field_body></field></docinfo></document>)
+recording: astext()
+! Test Field List
+
+| *note:* | This is note.</td>
+ |
+
+
+======================================================================
+Ignored Tests: method call should not changed for escaping string
+----------------------------------------------------------------------
+Legacy test data is recorded
+Console:
+__main__:Behavior_rst2codeplex.method_call_should_not_changed_for_escaping_string()
+recording: dispatch_visit(<document ids="test-escape" names="test\ escape" source="<string>" title="Test Escape"><title>Test Escape</title><paragraph><, >, @, &</paragraph></document>)
+recording: dispatch_visit(<title>Test Escape</title>)
+recording: dispatch_visit(Test Escape)
+recording: dispatch_departure(Test Escape)
+recording: dispatch_departure(<title>Test Escape</title>)
+recording: dispatch_visit(<paragraph><, >, @, &</paragraph>)
+recording: dispatch_visit(<, >, @, &)
+recording: dispatch_departure(<, >, @, &)
+recording: dispatch_departure(<paragraph><, >, @, &</paragraph>)
+recording: dispatch_departure(<document ids="test-escape" names="test\ escape" source="<string>" title="Test Escape"><title>Test Escape</title><paragraph><, >, @, &</paragraph></document>)
+recording: astext()
+! Test Escape
+
+
+<, >, @, &
+
+
+
+
+----------------------------------------------------------------------
+Ran 30 specs in 16.791s
+FAILED(errors=1)

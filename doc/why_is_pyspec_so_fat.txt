@@ -1,0 +1,66 @@
+=======================
+ Why is PySpec so fat?
+=======================
+
+:Author: Shibukawa Yoshiki
+:Contact: yoshiki at shibu.jp
+:Copyright: This document has been placed in the public domain.
+
+This document is essay for PySpec. It helps you to read PySpec source code.
+
+-------------------------------------
+2008.02.03 About(XX).should_equal(A)
+-------------------------------------
+
+PySpec's assertion message is better than other xUnits(except CppUnit).
+For example, your test data(=1) was in variable ``a``, and
+expected result value was 2, junit shows following message::
+
+  junit.framework.AssertionFailedError: expected:<2> but was:<1>
+
+Of course you know 1 was not 2. This sentence had less information to
+understand what the code has behaved. PySpec shows following message::
+
+  AssertionError: 'a' should equal 2, but was 1.
+
+PySpec could print variable name. It's easy if you use C/C++ macro.
+PySpec could realize it by using ``inspect.stack()``. PySpec gets stack frame
+information from ``inspect.stack()``. After that, get variable name by using
+``re`` module in the source code. These codes are in
+``pyspec.embedded.assertions.py``. Assertions that start with ``should`` can
+show variable names.
+
+I feel that ``inspect`` module is profound. I hope IronPython will support
+this module.
+
+-----------------------------------------------
+2008.02.20 class Behavior_BowlingScore(object):
+-----------------------------------------------
+
+The extra work to write test should be reduced  as much as possible.
+You have to extend the base TestCase class to write new test in PyUnit and
+other xUnits. But the fact that people's working memory is mere 7 plus or minus 2
+is well known. So I think that I should decrease the rule to write tests.
+
+In PyUnit, the framework searches classes that are sub class of TestCase to
+find unit tests. PySpec can't use this idea. PySpec use following tactics to find
+unit tests.
+
+1. Add special attribute to test methods.
+2. Search all methods of class and module functions and find special attribute.
+
+Starts from point 1. ``@spec`` decorator adds ``__pyspec_attribute`` to
+This mechanism is implemented in ``pyspec/__init__.py``. This attribute has an instance
+of PySpecAttribute's sub class. This object has all information of the test.
+For example, grouping option and exception classes are included in this object.
+
+And then, PySpec search the classes and the modules that have test methods/functions.
+At first, PySpec gets information of methods in the class. If there are any methods
+that has ``__pyspec_attribute`` attribute, PySpec detect the class as a test class.
+
+It takes more little time than PyUnit, but I believe its cost is reasonable!
+
+
+
+
+

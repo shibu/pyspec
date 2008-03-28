@@ -1,0 +1,152 @@
+=====================
+ PySpec ユーザガイド
+=====================
+
+:Author: Shibukawa Yoshiki
+:Contact: yoshiki at shibu.jp
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+-------------------------
+ 仕様の書き方/実行の仕方
+-------------------------
+
+仕様を書く
+==========
+
+PySpecでは、Pythonの関数、もしくはメソッドを使って仕様を表現します。
+仕様メソッドであるという宣言を行うデコレータを付加することで、仕様メソッド
+として扱われるようになります。
+
+example::
+
+  # これは関数形式の仕様
+
+  @spec
+  def New_list_should_be_empty():
+      About(list()).should_be_empty()
+
+  # これがメソッド形式の仕様
+  class List_Behavior(object):
+    @spec
+    def New_list_should_be_empty():
+        About(list()).should_be_empty()
+
+もし、仕様メソッドと、コンテキスト(コンテキストは準備を行うメソッド)の間で、
+何かデータやオブジェクトを共有したい場合には、仕様はクラスにまとめる方が良いです。
+PySpecはお互いのメソッド間で悪影響が起きないように独立した環境を作成します。
+仕様メソッドごとにクラスのオブジェクトを生成してから実行します。クラスにまとめると
+他の領域を侵すことがなくなります。
+
+PySpecはモジュールのトップレベルの関数もしくはクラスを調査してテストを発見します。
+もし、ネストされたクラスの中に仕様を記述した場合には、その仕様は実行されません。
+
+コンソールでの仕様の実行
+========================
+
+コンソールでの実行の仕方には二通りあります。ひとつが ``cuipyspec.py`` スクリプトを
+実行することです。もうひとつの方法は、スタートアップコードを、仕様のソースコードに
+追加することです。後者の方が簡単です。
+
+example::
+    from pyspec import *
+
+    # ここに仕様を定義していきます。
+
+    if __name__ == "__main__":
+        run_test()
+
+仕様を登録するコードを書く必要はありません。PySpecはロードされているすべての
+モジュールを自動的に調べます。このため、上記のコードでもテストが実行されます。
+
+もし、いくつかのファイルに分かれた仕様をまとめて実行したい場合には、以下のような
+テスト起動用のスクリプトを作成するのが一番簡単な方法です。
+
+example::
+    from pyspec import*
+
+    import behavior_entities
+    import behavior_database_access
+    import behavior_views
+
+    run_test()
+
+このようなスタートアップスクリプトを作成すると同時に、すべての仕様スクリプトに
+個別実行用のスタートアップコードを書いておくと、まとめて実行したり、
+個別にも実行したりできるため便利です。
+
+GUIでの仕様の実行
+=================
+
+GUI上でも実行することができます。 ``wxpyspec.py`` スクリプトを実行してください。
+``[Project] - [Add module...]`` メニューを使い、仕様のモジュールを追加することが
+できます。
+
+:注意: 現在GUIランナーは開発途中です。いくつかのバグや修正すべき箇所が残っています。
+
+もしGUIのスタートアップコードを仕様スクリプトに追加したい場合には、
+以下のようなコードを追加します::
+
+  if __name__ == "__main__":
+      import pyspec.wxui.controller
+      controller = pyspec.wxui.controller.WxPySpecController(0)
+      controller.MainLoop()
+
+----------
+ 仕様名称
+----------
+
+良い仕様を書くためには、良い名前を付ける必要があります。 PySpecでは、この名前を付けるのに
+二通りの方法があります。これらの仕様名は結果レポートの中に書き込まれます。
+
+メソッド名
+==========
+
+メソッド名を使用する書き方がシンプルな方法です。
+
+====================================== ==================================
+メソッド名                             仕様名
+====================================== ==================================
+``A_stack_which_have_one_value()``     ``A stack which have one value``
+``version_info__in_sys_module()``      ``version_info in sys module``
+``one_of__test_method__should_fail()`` ``one of test_method should fail``
+====================================== ==================================
+
+この機能は ``pyspec.util.create_spec_name()`` で実装されています。
+
+Docstring
+=========
+
+Docstringも仕様名として使用されます。Python 2.Xはメソッド名としてはアスキー英数字のみ
+が使用できます。この機能はアジア圏のプログラマが自分の言語を使いたい場合に使用できます。
+
+もしコンテキストメソッドおよび、仕様メソッドにdocstringを書いたとすると、最初の行が
+仕様名として使用されます。
+
+PySpecはソースコードの最初の行から文字コードを取得します。もし日本語や中国語などの
+言語を使用したい場合には以下のように書きます::
+
+    # -*- coding: utf8 -*-
+
+PySpecはPythonで扱えるコーデックならば扱うことができます。
+
+example::
+
+    class StackBehavior(object):
+        """スタックの動作仕様."""
+        @context
+        def A_stack_with_one_item(self):
+            """要素をひとつ持つスタック."""
+            self.stack = Stack()
+            self.stack.push("one item")
+
+        @spec
+        def should_not_be_empty(self):
+            """空ではない."""
+            About(self.stack).should_not_be_empty()
+
+result::
+
+    要素をひとつ持つスタック
+        空ではない ... OK

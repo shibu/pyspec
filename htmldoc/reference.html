@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title>PySpec Reference</title>
+<meta name="author" content="Shibukawa Yoshiki" />
+<meta name="copyright" content="This document has been placed in the public domain." />
+<style type="text/css">
+
+/*
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Date: $Date: 2005-12-18 01:56:14 +0100 (Sun, 18 Dec 2005) $
+:Revision: $Revision: 4224 $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin-left: 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em ;
+  background-color: #eeeeee }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+tt.docutils {
+  background-color: #eeeeee }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="pyspec-reference">
+<h1 class="title">PySpec Reference</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Shibukawa Yoshiki</td></tr>
+<tr><th class="docinfo-name">Contact:</th>
+<td>yoshiki at shibu.jp</td></tr>
+<tr><th class="docinfo-name">Copyright:</th>
+<td>This document has been placed in the public domain.</td></tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#decorators" id="id1" name="id1">Decorators</a><ul>
+<li><a class="reference" href="#spec" id="id2" name="id2"><tt class="docutils literal"><span class="pre">&#64;spec</span></tt></a></li>
+<li><a class="reference" href="#context" id="id3" name="id3"><tt class="docutils literal"><span class="pre">&#64;context</span></tt></a></li>
+<li><a class="reference" href="#spec-finalize" id="id4" name="id4"><tt class="docutils literal"><span class="pre">&#64;spec_finalize</span></tt></a></li>
+<li><a class="reference" href="#class-context" id="id5" name="id5"><tt class="docutils literal"><span class="pre">&#64;class_context</span></tt></a></li>
+<li><a class="reference" href="#class-finalize" id="id6" name="id6"><tt class="docutils literal"><span class="pre">&#64;class_finalize</span></tt></a></li>
+<li><a class="reference" href="#ignore" id="id7" name="id7"><tt class="docutils literal"><span class="pre">&#64;ignore</span></tt></a></li>
+<li><a class="reference" href="#data-provider" id="id8" name="id8"><tt class="docutils literal"><span class="pre">&#64;data_provider</span></tt></a><ul>
+<li><a class="reference" href="#single-key-data-providing" id="id9" name="id9">Single Key Data Providing</a></li>
+<li><a class="reference" href="#multi-key-data-providing" id="id10" name="id10">Multi Key Data Providing</a></li>
+<li><a class="reference" href="#multi-key-external-data-with-multi-data-provider" id="id11" name="id11">Multi Key External Data with Multi Data Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#verification-methods" id="id12" name="id12">Verification Methods</a><ul>
+<li><a class="reference" href="#about-actual-value-should-equal-expected-value" id="id13" name="id13"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_equal('expected</span> <span class="pre">value')</span></tt></a></li>
+<li><a class="reference" href="#about-actual-value-should-equal-nearly-expected-value-delta-none" id="id14" name="id14"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_equal_nearly('expected</span> <span class="pre">value',</span> <span class="pre">delta=None)</span></tt></a></li>
+<li><a class="reference" href="#about-actual-value-should-be-true" id="id15" name="id15"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_be_true()</span></tt></a></li>
+<li><a class="reference" href="#about-actual-value-should-be-same-expected-value" id="id16" name="id16"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_be_same('expected</span> <span class="pre">value')</span></tt></a></li>
+<li><a class="reference" href="#about-sequence-should-include-value" id="id17" name="id17"><tt class="docutils literal"><span class="pre">About('sequence').should_include('value')</span></tt></a></li>
+<li><a class="reference" href="#about-actual-value-should-be-in-sequence" id="id18" name="id18"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_be_in('sequence')</span></tt></a></li>
+<li><a class="reference" href="#about-sequence-should-be-empty" id="id19" name="id19"><tt class="docutils literal"><span class="pre">About('sequence').should_be_empty()</span></tt></a></li>
+<li><a class="reference" href="#verify-fail" id="id20" name="id20"><tt class="docutils literal"><span class="pre">Verify.fail()</span></tt></a></li>
+<li><a class="reference" href="#verify-ignore" id="id21" name="id21"><tt class="docutils literal"><span class="pre">Verify.ignore()</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#simple-mock-objects" id="id22" name="id22">Simple Mock Objects</a><ul>
+<li><a class="reference" href="#mockobject-mockobjectrecorder" id="id23" name="id23"><tt class="docutils literal"><span class="pre">MockObject</span></tt> / <tt class="docutils literal"><span class="pre">MockObjectRecorder</span></tt></a></li>
+<li><a class="reference" href="#filemockobject" id="id24" name="id24"><tt class="docutils literal"><span class="pre">FileMockObject</span></tt></a></li>
+<li><a class="reference" href="#mocksocket" id="id25" name="id25"><tt class="docutils literal"><span class="pre">MockSocket</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#support-functions" id="id26" name="id26">Support Functions</a><ul>
+<li><a class="reference" href="#dprint" id="id27" name="id27"><tt class="docutils literal"><span class="pre">dprint()</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id1" id="decorators" name="decorators">Decorators</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id2" id="spec" name="spec"><tt class="docutils literal"><span class="pre">&#64;spec</span></tt></a></h2>
+<p>This decorator makes function/method to specification.
+This decorator can accept module function and method.</p>
+<p>example:</p>
+<pre class="literal-block">
+&#64;spec
+def stack_should_empty():
+  &quot;&quot;&quot;Stack can be checked if empty or not.&quot;&quot;&quot;
+  stack = Stack()
+  About(stack).should_empty()
+</pre>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">expected</span></tt></td>
+<td>This spec should raise the exception.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">group</span></tt></td>
+<td>Select the contexts and finalizes.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">dbc</span></tt></td>
+<td>Select DbC future on/off(default=True)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id3" id="context" name="context"><tt class="docutils literal"><span class="pre">&#64;context</span></tt></a></h2>
+<p>This decorator makes function/method to setup method.
+Context methods was called before each specifications.
+In PySpec, almost all setup should be written in setup.
+You will write more context methods than setup method of
+other TDD frameworks.</p>
+<p>If you don't use '<tt class="docutils literal"><span class="pre">group</span></tt>' parameter, all context methods
+were called before each spec methods.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">group</span></tt></td>
+<td>Set the context method's group.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id4" id="spec-finalize" name="spec-finalize"><tt class="docutils literal"><span class="pre">&#64;spec_finalize</span></tt></a></h2>
+<p>This decorator makes function/method to teardown method.
+finalize method was called after each specification methods.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">group</span></tt></td>
+<td>Set the finalize method's group.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id5" id="class-context" name="class-context"><tt class="docutils literal"><span class="pre">&#64;class_context</span></tt></a></h2>
+<p>The methods which have this decorator were called only first time
+before all contexts. If you want to set any variables in
+&#64;class_context method, the variable should be class variable.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id6" id="class-finalize" name="class-finalize"><tt class="docutils literal"><span class="pre">&#64;class_finalize</span></tt></a></h2>
+<p>The methods which have this decorator were called only last time
+after all finalize. This method would be called even if the spec
+failed.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id7" id="ignore" name="ignore"><tt class="docutils literal"><span class="pre">&#64;ignore</span></tt></a></h2>
+<p>The spec method which have this decorator was ignored.</p>
+<p>example:</p>
+<pre class="literal-block">
+&#64;spec
+&#64;ignore
+def stack_can_have_any_objects():
+  # not implemented yet! sorry!
+  pass
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id8" id="data-provider" name="data-provider"><tt class="docutils literal"><span class="pre">&#64;data_provider</span></tt></a></h2>
+<p>This decorator supports reusing spec methods. The method that has this
+decorator supplies external data for the spec method. This idea comes from
+TestNG. Thanks!</p>
+<p>This decorated method has been called before generating spec object.
+So the decorated method should be class method.</p>
+<p>example:</p>
+<pre class="literal-block">
+def fibonacci(n):
+    if n == 0:
+        return 0
+    if n &lt;= 2:
+        return 1
+    return fibonacci(n-1) + fibonacci(n-2)
+
+
+class Behavior_fibonacci(object):
+    &#64;classmethod
+    &#64;data_provider(cls, key=(&quot;n&quot;, &quot;expected_return&quot;))
+    def create_data_for_test(cls):
+        return ((0, 0), (1, 1), (2, 1), (3, 2))
+
+    &#64;spec
+    def fibonacci_should_return_expected_value(self, n, expected_return):
+        About(fibonacci(n)).should_equal(expected_return)
+</pre>
+<p>result:</p>
+<pre class="literal-block">
+fibonacci should return expected value &lt;args=expected_return:0 n:0&gt; ... OK
+fibonacci should return expected value &lt;args=expected_return:1 n:1&gt; ... OK
+fibonacci should return expected value &lt;args=expected_return:1 n:2&gt; ... OK
+fibonacci should return expected value &lt;args=expected_return:2 n:3&gt; ... OK
+
+----------------------------------------------------------------------
+Ran 4 specs in 0.087s
+OK
+</pre>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">key</span></tt></td>
+<td>Set the spec method's parameter name.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">group</span></tt></td>
+<td>Set the data provider method's group.</td>
+</tr>
+</tbody>
+</table>
+<p>There are three ways to supply external data.</p>
+<div class="section">
+<h3><a class="toc-backref" href="#id9" id="single-key-data-providing" name="single-key-data-providing">Single Key Data Providing</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">key</span></tt> parameter should be string. And the method has to return
+sequence.</p>
+<p>sample:</p>
+<pre class="literal-block">
+&#64;classmethod
+&#64;data_provider(key=&quot;weather&quot;)
+def provide_weather(cls):
+    return (&quot;fine&quot;, &quot;rain&quot;, &quot;snow&quot;)
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id10" id="multi-key-data-providing" name="multi-key-data-providing">Multi Key Data Providing</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">key</span></tt> parameter should be <tt class="docutils literal"><span class="pre">tuple</span></tt> or <tt class="docutils literal"><span class="pre">list</span></tt> that contains strings.
+The method has to return 2D sequence.</p>
+<p>sample:</p>
+<pre class="literal-block">
+&#64;classmethod
+&#64;data_provider(key=(&quot;n&quot;, &quot;expected_return&quot;))
+def create_data_for_test(cls):
+    return ((0, 0), (1, 1), (2, 1), (3, 2))
+</pre>
+</div>
+<div class="section">
+<h3><a class="toc-backref" href="#id11" id="multi-key-external-data-with-multi-data-provider" name="multi-key-external-data-with-multi-data-provider">Multi Key External Data with Multi Data Provider</a></h3>
+<p>You can combine some data providers.</p>
+<p>sample:</p>
+<pre class="literal-block">
+&#64;classmethod
+&#64;data_provider(key=&quot;time&quot;)
+def provide_time(cls):
+    return (&quot;morning&quot;, &quot;noon&quot;, &quot;night&quot;)
+
+&#64;classmethod
+&#64;data_provider(key=&quot;city&quot;)
+def provide_cities(cls):
+    return (&quot;Tokyo&quot;, &quot;Osaka&quot;, &quot;Nagoya&quot;)
+
+&#64;spec
+def check_something(self, time, city)
+    # do something
+</pre>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id12" id="verification-methods" name="verification-methods">Verification Methods</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id13" id="about-actual-value-should-equal-expected-value" name="about-actual-value-should-equal-expected-value"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_equal('expected</span> <span class="pre">value')</span></tt></a></h2>
+<p>This method asserts the values are same. There is a counter
+method <tt class="docutils literal"><span class="pre">should_not_equal()</span></tt> too.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id14" id="about-actual-value-should-equal-nearly-expected-value-delta-none" name="about-actual-value-should-equal-nearly-expected-value-delta-none"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_equal_nearly('expected</span> <span class="pre">value',</span> <span class="pre">delta=None)</span></tt></a></h2>
+<p>This method asserts the float values are same. You can set the delta.
+If you wouldn't pass delta value, PySpec set the delta to 1% of expected
+value.</p>
+<p>There is <tt class="docutils literal"><span class="pre">should_not_equal_nearly()</span></tt> too.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id15" id="about-actual-value-should-be-true" name="about-actual-value-should-be-true"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_be_true()</span></tt></a></h2>
+<p>This method assert the value are True. In pyspec you can use should_be_false() too.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id16" id="about-actual-value-should-be-same-expected-value" name="about-actual-value-should-be-same-expected-value"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_be_same('expected</span> <span class="pre">value')</span></tt></a></h2>
+<p>If results of id() would be different, this method would fail.
+You can use should_not_be_same() too.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id17" id="about-sequence-should-include-value" name="about-sequence-should-include-value"><tt class="docutils literal"><span class="pre">About('sequence').should_include('value')</span></tt></a></h2>
+<p>This method verifies weather the value is in the sequence. That sequence
+should have <tt class="docutils literal"><span class="pre">__contains__()</span></tt> or <tt class="docutils literal"><span class="pre">__iter__()</span></tt>.
+You can use should_not_include() too.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id18" id="about-actual-value-should-be-in-sequence" name="about-actual-value-should-be-in-sequence"><tt class="docutils literal"><span class="pre">About('actual</span> <span class="pre">value').should_be_in('sequence')</span></tt></a></h2>
+<p>This method verifies weather the value is in the sequence. That sequence
+should support <tt class="docutils literal"><span class="pre">in</span></tt>. You can use should_not_be_in() too.
+This is a counter method of <tt class="docutils literal"><span class="pre">About().should_include()</span></tt>.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id19" id="about-sequence-should-be-empty" name="about-sequence-should-be-empty"><tt class="docutils literal"><span class="pre">About('sequence').should_be_empty()</span></tt></a></h2>
+<p>This method verifies weather the sequence is empty. That sequence should
+have <tt class="docutils literal"><span class="pre">__len__()</span></tt> method. You can use <tt class="docutils literal"><span class="pre">should_not_be_empty()</span></tt> too.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id20" id="verify-fail" name="verify-fail"><tt class="docutils literal"><span class="pre">Verify.fail()</span></tt></a></h2>
+<p>This method fails the test. You can use this method to assert the pass
+was wrong:</p>
+<pre class="literal-block">
+&#64;spec
+def exception_should_be_raised():
+  try:
+    do_something()
+    Verify.fail()
+  except ValueError:
+    pass
+</pre>
+<p>In the xUnit which can not treat the exception, a programmer must use
+any method similar to this method to write tests for exceptions.
+In PySpec, you can write the spec of exception more smartly:</p>
+<pre class="literal-block">
+&#64;spec(expect=ValueError)
+def exception_should_be_raised():
+  do_something()
+</pre>
+<p>If you have better sample of this method, please send it to me.</p>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id21" id="verify-ignore" name="verify-ignore"><tt class="docutils literal"><span class="pre">Verify.ignore()</span></tt></a></h2>
+<p>Ignore the test. It has the same effect as <tt class="docutils literal"><span class="pre">&#64;ignore</span></tt>.</p>
+<p>example:</p>
+<pre class="literal-block">
+&#64;spec
+def connect_to_SQLServer():
+  if sys.platform != &quot;win32&quot;:
+    Verify.ignore()
+  do_something()
+</pre>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id22" id="simple-mock-objects" name="simple-mock-objects">Simple Mock Objects</a></h1>
+<p>These objects are defined in <tt class="docutils literal"><span class="pre">pyspec.mockobject</span></tt> module.
+This mock module is implemented for testing pyspec itself.</p>
+<div class="section">
+<h2><a class="toc-backref" href="#id23" id="mockobject-mockobjectrecorder" name="mockobject-mockobjectrecorder"><tt class="docutils literal"><span class="pre">MockObject</span></tt> / <tt class="docutils literal"><span class="pre">MockObjectRecorder</span></tt></a></h2>
+<p>These are basic mock classes. These classes work together.
+<tt class="docutils literal"><span class="pre">MockObjectRecorder</span></tt> object records all method call.
+<tt class="docutils literal"><span class="pre">MockObjectRecorder._get_mock_object_()</span></tt> generates <tt class="docutils literal"><span class="pre">MockObject</span></tt> object
+which records what method should be called.
+This <tt class="docutils literal"><span class="pre">MockObject</span></tt> object verifies the method call.
+You can record parameters and return value.</p>
+<p>example:</p>
+<pre class="literal-block">
+recorder = MockObjectRecorder()
+recorder.add(1, 2) == 3             # this method will return 3
+calc = recorder._get_mock_object_() # stop recording
+
+print calc(1, 2)    # =&gt; 3
+calc._verify_()     # if some record methods were not called, raise AssertionError
+</pre>
+<p>You should write the code that operates <tt class="docutils literal"><span class="pre">MockObjectRecorder</span></tt>
+in context method, and call <tt class="docutils literal"><span class="pre">_verify_()</span></tt> method in spec method.</p>
+<p>Following table shows special methods of <tt class="docutils literal"><span class="pre">MockObject</span></tt> classes.
+Except these methods, recorder object can accept any method call.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">MockObjectRecorder(is_print=False)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">is_print=True</span></tt> option is useful for traditional printf debugging.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">MockObjectRecorder._get_mock_object_()</span></tt></td>
+<td>Create mock object and return.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">MockObject._verify_()</span></tt></td>
+<td>Call this method at the end of spec methods.</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">MockObjectRecorder</span></tt> can record flexible method call.</p>
+<p>example:</p>
+<pre class="literal-block">
+recorder = MockObjectRecorder()      # create recorder first!
+recorder.add(1, 2).repeat(3) == 3    # this method will be called 3 times
+recorder.mul().with_any_parameter()  # this method can accept any parameter
+</pre>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id24" id="filemockobject" name="filemockobject"><tt class="docutils literal"><span class="pre">FileMockObject</span></tt></a></h2>
+<p>This is the mock object for file writing.
+This verifies between the content of write method parameters and the string of
+constructor parameter.</p>
+<p>This object only has <tt class="docutils literal"><span class="pre">write()</span></tt> method and not has <tt class="docutils literal"><span class="pre">writelines()</span></tt>
+and other methods.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">FileMockObject(expected_contents)</span></tt></td>
+<td>Set the expected string and create <tt class="docutils literal"><span class="pre">FileMockObject</span></tt> object.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">write(actual)</span></tt></td>
+<td>Check the actual output with the expected string</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">_verify_()</span></tt></td>
+<td>Call this method at the end of spec methods.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h2><a class="toc-backref" href="#id25" id="mocksocket" name="mocksocket"><tt class="docutils literal"><span class="pre">MockSocket</span></tt></a></h2>
+<p>This is the mock object for <tt class="docutils literal"><span class="pre">socket</span></tt>. This object supports blocking mode and
+non-blocking mode. If in blocking mode, socket.error would be raised
+when all recv messages would be used. And in non-blocking mode, <tt class="docutils literal"><span class="pre">AssertionError</span></tt>
+would be raised.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">MockSocket(recv=None,</span> <span class="pre">send=None)</span></tt></td>
+<td>Create <tt class="docutils literal"><span class="pre">MockSocket</span></tt> object. You can set recv/send messages(as list of array).</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">_add_recv_message_(\*message)</span></tt></td>
+<td>Add messages. These messages will become the result of <tt class="docutils literal"><span class="pre">recv()</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">_add_send_message_(\*message)</span></tt></td>
+<td>Add messages. These messages will become the expected input string of <tt class="docutils literal"><span class="pre">send()</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<h1><a class="toc-backref" href="#id26" id="support-functions" name="support-functions">Support Functions</a></h1>
+<div class="section">
+<h2><a class="toc-backref" href="#id27" id="dprint" name="dprint"><tt class="docutils literal"><span class="pre">dprint()</span></tt></a></h2>
+<p>It's pretty print function for debugging. When your specs become fail,
+this function helps you to find bugs.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
